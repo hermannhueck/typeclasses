@@ -9,27 +9,27 @@ version:        0.1.0.0
 description:    Please see the README on Github at <https://github.com/githubuser/typeclasses#readme>
 homepage:       https://github.com/githubuser/typeclasses#readme
 bug-reports:    https://github.com/githubuser/typeclasses/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2018 Author name here
-license:        BSD3
-license-file:   LICENSE
+author:         Hermann Hueck
+maintainer:     hermann.hueck@mailbox.org
+copyright:      2018 Hermann Hueck
+license:        MIT
+license-file:   ../LICENSE
 build-type:     Simple
 cabal-version:  >= 1.10
 
 extra-source-files:
-    ChangeLog.md
     README.md
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/typeclasses
+  location: https://github.com/hermannhueck/typeclasses/Haskell
 
 library
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
+      , time
   exposed-modules:
       Lib
   other-modules:
@@ -44,6 +44,7 @@ executable typeclasses-exe
   build-depends:
       base >=4.7 && <5
     , typeclasses
+    , time
   other-modules:
       Paths_typeclasses
   default-language: Haskell2010
@@ -57,6 +58,7 @@ test-suite typeclasses-test
   build-depends:
       base >=4.7 && <5
     , typeclasses
+    , time
   other-modules:
       Paths_typeclasses
   default-language: Haskell2010
