@@ -6,9 +6,8 @@
 
 name:           typeclasses
 version:        0.1.0.0
-description:    Please see the README on Github at <https://github.com/githubuser/typeclasses#readme>
-homepage:       https://github.com/githubuser/typeclasses#readme
-bug-reports:    https://github.com/githubuser/typeclasses/issues
+description:    Please see the README on Github at <https://github.com/hermannhueck/typeclasses#readme>
+homepage:       https://github.com/hermannhueck/typeclasses#readme
 author:         Hermann Hueck
 maintainer:     hermann.hueck@mailbox.org
 copyright:      2018 Hermann Hueck

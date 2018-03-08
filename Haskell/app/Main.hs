@@ -1,5 +1,6 @@
 module Main where
 
+import           Cat
 import           Data.Fixed
 import           Data.Maybe         (fromJust)
 import           Data.Time
@@ -24,12 +25,25 @@ utcTime year month day hour min sec = utcTimeOf d t
 
 main :: IO ()
 main = do
-  putStrLn "-----"
+  putStrLn "----- formatting Strings ..."
   putStrLn "Cats are meeting here!"
   putStrLn $ format "Cats are meeting here!"
+  pprintt "Cats are meeting here!"
+  putStrLn "----- formatting Numbers ..."
   putStrLn $ format (2 :: Int)
+  pprintt (2 :: Int)
   putStrLn $ format (2 :: Double)
+  pprintt (2 :: Double)
+  putStrLn "----- formatting UTCTimes ..."
   putStrLn $ format $ utcTime 2018 3 8 16 38 19
+  pprintt $ utcTime 2018 3 8 16 38 19
   now <- getCurrentTime
-  putStrLn $ format now
+  pprintt now
+  putStrLn "----- formatting Cats ..."
+  let mizzi = Cat "Mizzi" 1 "black"
+      garfield = Cat "Garfield" 38 "ginger and black"
+  putStrLn $ format mizzi
+  pprintt mizzi
+  putStrLn $ format garfield
+  pprintt garfield
   putStrLn "-----"
