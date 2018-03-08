@@ -1,6 +1,6 @@
 {-# LANGUAGE FlexibleInstances #-}
 
-module Lib where
+module Printable where
 
 import           Data.Time
 

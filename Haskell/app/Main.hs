@@ -4,7 +4,7 @@ import           Data.Fixed
 import           Data.Maybe         (fromJust)
 import           Data.Time
 import           Data.Time.Calendar
-import           Lib
+import           Printable
 
 dayOf :: Integer -> Int -> Int -> Day
 dayOf year month day = fromJust $ fromGregorianValid year month day
