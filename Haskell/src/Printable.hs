@@ -13,7 +13,7 @@ class Printable a where
     pprintt x = putStrLn $ format x
 
 
--- some type class instances
+-- some type class instances for common types
 --
 instance Printable String where
     format = intersperse '-'
@@ -25,4 +25,4 @@ instance Printable Double where
     format = show
 
 instance Printable UTCTime where
-    format = show
+    format time = "The exact date is: " ++ formatTime defaultTimeLocale "%F, %T (%Z)" time

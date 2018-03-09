@@ -1,18 +1,21 @@
 module Main where
 
-import           Cat
 import           Data.Fixed
 import           Data.Maybe         (fromJust)
 import           Data.Time
 import           Data.Time.Calendar
+
+import           Domain
 import           Printable
 
 dayOf :: Integer -> Int -> Int -> Day
 dayOf year month day = fromJust $ fromGregorianValid year month day
 
 timeOf :: Int -> Int -> Int -> TimeOfDay
-timeOf hour min sec = TimeOfDay hour min fixed
-  where fixed = MkFixed $ toInteger $ sec * 10^12
+timeOf hour min sec = TimeOfDay hour min $ intToPico sec
+
+intToPico :: Int -> Pico
+intToPico value = MkFixed $ toInteger $ value * 10 ^ 12
 
 utcTimeOf :: Day -> TimeOfDay -> UTCTime
 utcTimeOf day tod = UTCTime day (timeOfDayToTime tod)
