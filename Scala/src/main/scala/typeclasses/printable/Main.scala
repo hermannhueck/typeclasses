@@ -19,10 +19,21 @@ object Main extends App {
     override def format(value: Date): String = "Date of meeting: " + value.toString
   }
 
+  def myPrint[A](value: A)(implicit printable: Printable[A]): Unit =
+    println(printable.format(value))
+
   println("-----")
 
   val mizzi = Cat("Mizzi", 1, "black")
   val garfield = Cat("Garfield", 38, "ginger and black")
+
+  println("---> Using the 'myPrint' to print ...")
+
+  myPrint("Cats are meeting here!")
+  myPrint(2)
+  myPrint(new Date)
+  myPrint(mizzi)
+  myPrint(garfield)
 
   println("---> Using the Printable companion object to print ...")
 
