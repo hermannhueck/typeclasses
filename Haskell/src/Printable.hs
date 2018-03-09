@@ -8,7 +8,9 @@ import           Data.Time
 -- the type class 'Printable'
 --
 class Printable a where
+
     format :: a -> String
+
     pprintt :: a -> IO ()
     pprintt x = putStrLn $ format x
 
