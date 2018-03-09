@@ -1,12 +1,8 @@
-import Dependencies._
+name := "typeclasses"
+version := "0.0.1-SNAPSHOT"
 
-lazy val root = (project in file(".")).
-  settings(
-    inThisBuild(List(
-      organization := "com.example",
-      scalaVersion := "2.12.4",
-      version      := "0.1.0-SNAPSHOT"
-    )),
-    name := "typeclasses",
-    libraryDependencies += scalaTest % Test
-  )
+scalaVersion := "2.12.4"
+
+libraryDependencies ++= Seq {
+  "org.scalatest" %% "scalatest" % "3.0.4" % Test
+}
