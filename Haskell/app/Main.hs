@@ -5,8 +5,11 @@ import           Data.Maybe         (fromJust)
 import           Data.Time
 import           Data.Time.Calendar
 
-import           Domain
+import           Cat
 import           Printable
+
+import           Json
+import           Person
 
 dayOf :: Integer -> Int -> Int -> Day
 dayOf year month day = fromJust $ fromGregorianValid year month day
@@ -26,8 +29,9 @@ utcTime year month day hour min sec = utcTimeOf d t
     d = fromJust $ fromGregorianValid year month day
     t = timeOf hour min sec
 
-main :: IO ()
-main = do
+mainPrintable :: IO ()
+mainPrintable = do
+  putStrLn "==========="
   putStrLn "----- formatting Strings ..."
   putStrLn "Cats are meeting here!"
   putStrLn $ format "Cats are meeting here!"
@@ -50,3 +54,31 @@ main = do
   putStrLn $ format garfield
   pprintt garfield
   putStrLn "-----"
+
+showJson :: Json -> IO()
+showJson json = putStrLn str
+  where str = show json ++ "\n   --   " ++ stringify json
+
+john = Person "John" True 34 "john@example.com" ["Helen", "Carlie", "Maria"]
+dave = Person "Dave" False 45 "dave@eample.com" []
+
+mainJson :: IO ()
+mainJson = do
+  putStrLn "==========="
+  showJson $ toJson False
+  showJson $ toJson (42 :: Integer)
+  showJson $ toJson (42 :: Int)
+  showJson $ toJson (42.0 :: Double)
+  showJson $ toJson (42.0 :: Float)
+  showJson $ toJson "a String"
+  showJson $ toJson $ Just "a String"
+  showJson $ toJson $ (Nothing :: Maybe String)
+  showJson $ toJson john
+  showJson $ toJson dave
+  showJson $ toJson $ Just dave
+  showJson $ toJson $ (Nothing :: Maybe Person)
+
+main :: IO ()
+main = do
+  mainPrintable
+  mainJson

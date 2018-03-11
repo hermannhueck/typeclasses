@@ -1,4 +1,4 @@
-module Domain where
+module Cat where
 
 import           Printable
 
