@@ -5,7 +5,6 @@ import java.util.Date
 import typeclasses.printable.domain.Cat
 import typeclasses.printable.lib.Printable
 import typeclasses.printable.lib.PrintableInstances._
-import typeclasses.printable.lib.Printable._
 
 object Main extends App {
 
@@ -22,7 +21,7 @@ object Main extends App {
   def myPrint[A](value: A)(implicit printable: Printable[A]): Unit =
     println(printable.format(value))
 
-  println("-----")
+  println("\n-----")
 
   val mizzi = Cat("Mizzi", 1, "black")
   val garfield = Cat("Garfield", 38, "ginger and black")
@@ -61,5 +60,5 @@ object Main extends App {
   mizzi.print
   garfield.print
 
-  println("-----")
+  println("-----\n")
 }
