@@ -1,6 +1,6 @@
-package typeclasses.myfunctor
+package typeclasses.catsfunctor
 
-import typeclasses.myfunctor.lib.Functor
+import cats.Functor
 
 object Main extends App {
 
@@ -25,7 +25,7 @@ object Main extends App {
     val myId = Identity(32)
     println(s"-- $myId")
 
-    import typeclasses.myfunctor.Identity.identityFunctor
+    import Identity.identityFunctor
 
     val mappedId = Functor[Identity].map(myId)(_ + 10)
 
@@ -38,7 +38,7 @@ object Main extends App {
     val myId = Identity(32)
     println(s"-- $myId")
 
-    import typeclasses.myfunctor.Identity.identityFunctor
+    import Identity.identityFunctor
 
     val mappedId = myId.map(_ + 10)
     val fmappedId = myId.fmap(_ + 10)
@@ -50,7 +50,8 @@ object Main extends App {
   {
     println
 
-    import typeclasses.myfunctor.lib.Functor.option._
+    import cats.instances.option._
+    import cats.syntax.functor._
 
     val myOpt = Option(32)
     println(s"-- $myOpt")
@@ -72,7 +73,8 @@ object Main extends App {
   {
     println
 
-    import typeclasses.myfunctor.lib.Functor.list._
+    import cats.instances.list._
+    import cats.syntax.functor._
 
     val myList = List(32, 33, 34)
     println(s"-- $myList")
@@ -87,8 +89,8 @@ object Main extends App {
   {
     println
 
-    import typeclasses.myfunctor.lib.Functor.option._
-    import typeclasses.myfunctor.lib.Functor.list._
+    import cats.instances.option._
+    import cats.instances.list._
 
     val idLift = Functor[Identity].lift[Int, Int](_ + 10)
 
