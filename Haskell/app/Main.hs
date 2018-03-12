@@ -72,11 +72,11 @@ mainJson = do
   showJson $ toJson (42.0 :: Float)
   showJson $ toJson "a String"
   showJson $ toJson $ Just "a String"
-  showJson $ toJson $ (Nothing :: Maybe String)
+  showJson $ toJson (Nothing :: Maybe String)
   showJson $ toJson john
   showJson $ toJson dave
   showJson $ toJson $ Just dave
-  showJson $ toJson $ (Nothing :: Maybe Person)
+  showJson $ toJson (Nothing :: Maybe Person)
 
 main :: IO ()
 main = do
