@@ -1,6 +1,6 @@
-package typeclasses.mycats
+package typeclasses.myfunctor
 
-import typeclasses.mycats.lib.Functor
+import typeclasses.myfunctor.lib.Functor
 
 final case class Identity[T](value: T)
 

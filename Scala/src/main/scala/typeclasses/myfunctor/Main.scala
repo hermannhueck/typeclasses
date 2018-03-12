@@ -1,6 +1,6 @@
-package typeclasses.mycats
+package typeclasses.myfunctor
 
-import typeclasses.mycats.lib.Functor
+import typeclasses.myfunctor.lib.Functor
 
 object Main extends App {
 
@@ -25,7 +25,7 @@ object Main extends App {
     val myId = Identity(32)
     println(s"-- $myId")
 
-    import typeclasses.mycats.Identity.identityFunctor
+    import typeclasses.myfunctor.Identity.identityFunctor
 
     val mappedId = Functor[Identity].map(myId)(_ + 10)
 
@@ -38,7 +38,7 @@ object Main extends App {
     val myId = Identity(32)
     println(s"-- $myId")
 
-    import typeclasses.mycats.Identity.identityFunctor
+    import typeclasses.myfunctor.Identity.identityFunctor
 
     val mappedId = myId.map(_ + 10)
     val fmappedId = myId.fmap(_ + 10)
@@ -50,7 +50,7 @@ object Main extends App {
   {
     println
 
-    import typeclasses.mycats.lib.Functor.option._
+    import typeclasses.myfunctor.lib.Functor.option._
 
     val myOpt = Option(32)
     println(s"-- $myOpt")
@@ -75,7 +75,7 @@ object Main extends App {
     val myList = List(32, 33, 34)
     println(s"-- $myList")
 
-    import typeclasses.mycats.lib.Functor.list._
+    import typeclasses.myfunctor.lib.Functor.list._
 
     val mappedList = myList.map(_ + 10)
     val fmappedList = myList.fmap(_ + 10)
@@ -94,7 +94,7 @@ object Main extends App {
     val liftedId = idLift(myId)
     println(s"-- $liftedId")
 
-    import typeclasses.mycats.lib.Functor.option._
+    import typeclasses.myfunctor.lib.Functor.option._
 
     val optLift = Functor[Option].lift[Int, Int](_ + 10)
 
@@ -103,7 +103,7 @@ object Main extends App {
     val liftedOpt = optLift(myOpt)
     println(s"-- $liftedOpt")
 
-    import typeclasses.mycats.lib.Functor.list._
+    import typeclasses.myfunctor.lib.Functor.list._
 
     val listLift = Functor[List].lift[Int, Int](_ + 10)
 

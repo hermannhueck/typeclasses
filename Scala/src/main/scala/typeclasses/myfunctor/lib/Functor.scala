@@ -1,4 +1,4 @@
-package typeclasses.mycats.lib
+package typeclasses.myfunctor.lib
 
 import scala.language.higherKinds
 
