@@ -1,6 +1,7 @@
 package typeclasses.catsfunctor
 
 import cats.Functor
+import typeclasses.catsfunctor.id.Identity
 
 object Main extends App {
 

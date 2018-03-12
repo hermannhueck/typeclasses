@@ -1,5 +1,6 @@
 package typeclasses.myfunctor
 
+import typeclasses.myfunctor.id.Identity
 import typeclasses.myfunctor.lib.Functor
 
 object Main extends App {
@@ -25,7 +26,7 @@ object Main extends App {
     val myId = Identity(32)
     println(s"-- $myId")
 
-    import typeclasses.myfunctor.Identity.identityFunctor
+    import typeclasses.myfunctor.id.Identity.identityFunctor
 
     val mappedId = Functor[Identity].map(myId)(_ + 10)
 
@@ -38,7 +39,7 @@ object Main extends App {
     val myId = Identity(32)
     println(s"-- $myId")
 
-    import typeclasses.myfunctor.Identity.identityFunctor
+    import typeclasses.myfunctor.id.Identity.identityFunctor
 
     val mappedId = myId.map(_ + 10)
     val fmappedId = myId.fmap(_ + 10)
