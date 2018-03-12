@@ -29,6 +29,9 @@ utcTime year month day hour min sec = utcTimeOf d t
     d = fromJust $ fromGregorianValid year month day
     t = timeOf hour min sec
 
+mizzi = Cat "Mizzi" 1 "black"
+garfield = Cat "Garfield" 38 "ginger and black"
+
 mainPrintable :: IO ()
 mainPrintable = do
   putStrLn "==========="
@@ -47,8 +50,6 @@ mainPrintable = do
   now <- getCurrentTime
   pprintt now
   putStrLn "----- formatting Cats ..."
-  let mizzi = Cat "Mizzi" 1 "black"
-      garfield = Cat "Garfield" 38 "ginger and black"
   putStrLn $ format mizzi
   pprintt mizzi
   putStrLn $ format garfield
@@ -78,7 +79,54 @@ mainJson = do
   showJson $ toJson $ Just dave
   showJson $ toJson (Nothing :: Maybe Person)
 
+mainShow :: IO ()
+mainShow = do
+  putStrLn "==========="
+  putStrLn $ show 123
+  putStrLn $ show 123.45
+  print 123.45
+  putStrLn $ show False
+  putStrLn $ show $ utcTime 2018 3 8 16 38 19
+  print $ utcTime 2018 3 8 16 38 19
+  now <- getCurrentTime
+  putStrLn $ show now
+  putStrLn $ show mizzi
+  putStrLn $ show garfield
+  print garfield
+
+mainEq :: IO ()
+mainEq = do
+  putStrLn "==========="
+  putStrLn "--> Scala programming error, Haskell compile error ..."
+  -- List(1, 2, 3).map(Option(_)).filter(_ == 1)    ==> Scala: programming error, compiler gives just a warning
+  -- filter (== 1) $ map Just [1,2,3]               ==> Haskell: the code doesn't compile
+  print $ filter (== Just 1) $ map Just [1,2,3]
+
+  putStrLn "--> Comparing Integers ..."
+  -- 123 == "xyz"                                   ==> Scala: programming error, compiler gives just a warning
+  -- 123 == "xyz"                                   ==> Haskell: the code doesn't compile
+  print $ 123 == 123
+  print $ 123 /= 123
+  print $ 123 == 234
+  print $ 123 /= 234
+
+  putStrLn "--> Comparing Maybes ..."
+  print $ Just 1 == Just 1
+  print $ Just 1 == Just 2
+  print $ Just 1 == Nothing
+  print $ Just 1 /= Nothing
+
+  putStrLn "--> Comparing Cats ..."
+  print $ mizzi == mizzi
+  print $ mizzi == garfield
+
+  putStrLn "--> Comparing Maybe[Cat] ..."
+  print $ Just mizzi == Just mizzi
+  print $ Just mizzi == Just garfield
+
 main :: IO ()
 main = do
-  mainPrintable
-  mainJson
+  -- mainPrintable
+  -- mainJson
+  mainShow
+  mainEq

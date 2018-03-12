@@ -9,7 +9,7 @@ data Cat = Cat
   { name  :: String
   , age   :: Int
   , color :: String
-  }
+  } deriving (Eq, Show)
 
 
 -- type class instances for doamin classes
