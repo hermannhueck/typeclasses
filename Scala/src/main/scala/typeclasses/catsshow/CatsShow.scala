@@ -1,4 +1,4 @@
-package typeclasses.show
+package typeclasses.catsshow
 
 object CatsShow extends App {
 
@@ -81,7 +81,7 @@ object CatsShow extends App {
   // -------------------------
   println("\n--> using show for Cat ...\n")
 
-  import typeclasses.show.domain.Cat
+  import typeclasses.catsshow.domain.Cat
 
   val mizzi = Cat("Mizzi", 1, "black and white")
   val garfield = Cat("Garfield", 38, "ginger and black")

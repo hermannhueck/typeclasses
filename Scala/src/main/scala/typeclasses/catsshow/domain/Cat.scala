@@ -1,4 +1,4 @@
-package typeclasses.show.domain
+package typeclasses.catsshow.domain
 
 import cats.Show
 import cats.instances.string._
