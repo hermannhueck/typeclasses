@@ -113,5 +113,58 @@ object Main extends App {
     println(s"-- $liftedList")
   }
 
+//  {
+//    println
+//
+//    import scala.language.higherKinds
+//    import typeclasses.myfunctor.lib.Functor.option._
+//    import typeclasses.myfunctor.lib.Functor.list._
+//
+//    def add10Lift[F[_]: Functor](functor: F[_]) = Functor[F].lift[Int, Int](_ + 10)
+//    // compiles, but doesn't work -- see output
+//
+//    val myId = Identity(32)
+//    println(s"-- $myId")
+//    val liftedId = add10Lift(myId)
+//    println(s"-- $liftedId")
+//
+//    val myOpt = Option(32)
+//    println(s"-- $myOpt")
+//    val liftedOpt = add10Lift(myOpt)
+//    println(s"-- $liftedOpt")
+//
+//    val myList = List(32, 33, 34)
+//    println(s"-- $myList")
+//    val liftedList = add10Lift(myList)
+//    println(s"-- $liftedList")
+//  }
+//
+//  {
+//    println
+//
+//    import scala.language.higherKinds
+//    import typeclasses.myfunctor.lib.Functor.option._
+//    import typeclasses.myfunctor.lib.Functor.list._
+//
+//    def makeLift[F[_]: Functor, A, B](functor: F[_])(f: A => B) = Functor[F].lift[A, B](f)
+//    def add10Lift[F[_]: Functor](functor: F[_]) = makeLift[F, Int, Int](functor)(_ + 10)
+//    // compiles, but doesn't work -- see output
+//
+//    val myId = Identity(32)
+//    println(s"-- $myId")
+//    val liftedId = add10Lift(myId)
+//    println(s"-- $liftedId")
+//
+//    val myOpt = Option(32)
+//    println(s"-- $myOpt")
+//    val liftedOpt = add10Lift(myOpt)
+//    println(s"-- $liftedOpt")
+//
+//    val myList = List(32, 33, 34)
+//    println(s"-- $myList")
+//    val liftedList = add10Lift(myList)
+//    println(s"-- $liftedList")
+//  }
+
   println
 }
