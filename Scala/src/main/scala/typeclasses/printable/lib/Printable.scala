@@ -11,7 +11,7 @@ object Printable {
 
     def format(implicit printable: Printable[A]): String = printable.format(value)
 
-    def print(implicit printable: Printable[A]) = println(format)
+    def print(implicit printable: Printable[A]): Unit = println(format)
   }
 
   def format[A](value: A)(implicit printable: Printable[A]): String = value.format
