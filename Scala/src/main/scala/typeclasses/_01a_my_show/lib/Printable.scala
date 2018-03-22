@@ -25,12 +25,12 @@ object Printable {
       override def format(value: String): String = value
     }
 
-    implicit val intPrintable: Printable[Int] = new Printable[Int] {
-      override def format(value: Int): String = value.toString
-    }
-
     implicit val booleanPrintable: Printable[Boolean] = new Printable[Boolean] {
       override def format(value: Boolean): String = value.toString
+    }
+
+    implicit val intPrintable: Printable[Int] = new Printable[Int] {
+      override def format(value: Int): String = value.toString
     }
 
     implicit val datePrintable: Printable[Date] = new Printable[Date] {
@@ -38,8 +38,7 @@ object Printable {
     }
   }
 
-  // interface syntax methods for the type class are provided
-  // as extension functions for any value of type A
+  // interface syntax methods as extension methods
   //
   object syntax {
 
