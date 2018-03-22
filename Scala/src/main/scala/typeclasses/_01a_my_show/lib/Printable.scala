@@ -1,4 +1,4 @@
-package typeclasses.printable.lib
+package typeclasses._01a_my_show.lib
 
 trait Printable[A] {
 

@@ -1,4 +1,4 @@
-package typeclasses.eq
+package typeclasses._03_cats_eq
 
 object CatsEq extends App {
 

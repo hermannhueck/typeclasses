@@ -1,7 +1,7 @@
-package typeclasses.myfunctor
+package typeclasses._04a_my_functor
 
-import typeclasses.myfunctor.id.Identity
-import typeclasses.myfunctor.lib.Functor
+import typeclasses._04a_my_functor.id.Identity
+import typeclasses._04a_my_functor.lib.Functor
 
 object Main extends App {
 
@@ -26,7 +26,7 @@ object Main extends App {
     val myId = Identity(32)
     println(s"-- $myId")
 
-    import typeclasses.myfunctor.id.Identity.identityFunctor
+    import typeclasses._04a_my_functor.id.Identity.identityFunctor
 
     val mappedId = Functor[Identity].map(myId)(_ + 10)
 
@@ -39,7 +39,7 @@ object Main extends App {
     val myId = Identity(32)
     println(s"-- $myId")
 
-    import typeclasses.myfunctor.id.Identity.identityFunctor
+    import typeclasses._04a_my_functor.id.Identity.identityFunctor
 
     val mappedId = myId.map(_ + 10)
     val fmappedId = myId.fmap(_ + 10)
@@ -51,7 +51,7 @@ object Main extends App {
   {
     println
 
-    import typeclasses.myfunctor.lib.Functor.option._
+    import typeclasses._04a_my_functor.lib.Functor.option._
 
     val myOpt = Option(32)
     println(s"-- $myOpt")
@@ -73,7 +73,7 @@ object Main extends App {
   {
     println
 
-    import typeclasses.myfunctor.lib.Functor.list._
+    import typeclasses._04a_my_functor.lib.Functor.list._
 
     val myList = List(32, 33, 34)
     println(s"-- $myList")
@@ -88,8 +88,8 @@ object Main extends App {
   {
     println
 
-    import typeclasses.myfunctor.lib.Functor.option._
-    import typeclasses.myfunctor.lib.Functor.list._
+    import typeclasses._04a_my_functor.lib.Functor.option._
+    import typeclasses._04a_my_functor.lib.Functor.list._
 
     val idLift = Functor[Identity].lift[Int, Int](_ + 10)
 
