@@ -26,7 +26,7 @@ object Main extends App {
   {
     println
 
-    import typeclasses._05a_my_monad.lib.Monad.option._
+    import typeclasses._05a_my_monad.lib.Monad.instances._
 
     val myOpt = Option(32)
     println(s"-- Option(32): $myOpt")
@@ -52,7 +52,7 @@ object Main extends App {
   {
     println
 
-    import typeclasses._05a_my_monad.lib.Monad.list._
+    import typeclasses._05a_my_monad.lib.Monad.instances._
 
     val myList = List(32, 33, 34)
     println(s"-- List(32, 33, 34): $myList")
@@ -89,7 +89,7 @@ object Main extends App {
   {
     println
 
-    import typeclasses._05a_my_monad.lib.Monad.option._
+    import typeclasses._05a_my_monad.lib.Monad.instances._
     import Monad.pure
 
     val myOpt = 32.pure[Option]
@@ -116,7 +116,7 @@ object Main extends App {
   {
     println
 
-    import typeclasses._05a_my_monad.lib.Monad.list._
+    import typeclasses._05a_my_monad.lib.Monad.instances._
     import Monad.pure
 
     val myList = List(32, 33, 34)

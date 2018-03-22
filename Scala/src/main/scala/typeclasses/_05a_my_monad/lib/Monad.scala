@@ -22,15 +22,12 @@ object Monad {
     def pure[F[_]](implicit F: Monad[F]): F[A] = F.pure(a)
   }
 
-  object option {
+  object instances {
 
     implicit val optionMonad: Monad[Option] = new Monad[Option] {
       override def pure[A](a: A): Option[A] = Option(a)
       override def flatMap[A, B](fa: Option[A])(f: A => Option[B]): Option[B] = fa.flatMap(f)
     }
-  }
-
-  object list {
 
     implicit val listMonad: Monad[List] = new Monad[List] {
       override def pure[A](a: A): List[A] = List(a)
