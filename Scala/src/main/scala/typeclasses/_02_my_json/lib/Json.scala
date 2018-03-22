@@ -26,9 +26,7 @@ final case class JsObject(bindings: Map[String, Json]) extends Json
 // Json companion object
 //
 object Json {
-
-  def toJson[A](value: A)(implicit w: JsonWriter[A]): Json =
-    w.write(value)
+  def toJson[A](value: A)(implicit w: JsonWriter[A]): Json = w.write(value)
 }
 
 // The "serialize to JSON" behaviour is encoded in this trait.
@@ -38,18 +36,22 @@ trait JsonWriter[A] {
   def write(value: A): Json
 }
 
-// The type classes comnpanion object
+// The type class companion object
 //
 object JsonWriter {
 
+  // type class interface syntax provided by
   // extension method toJson for any type for which an implicit writer instance is in scope
-  implicit class JsonWriterOps[A](value: A) {
-    def toJson(implicit writer: JsonWriter[A]): Json =
-      writer.write(value)
+  //
+  object syntax {
+    implicit class JsonWriterOps[A](value: A) {
+      def toJson(implicit writer: JsonWriter[A]): Json = writer.write(value)
+    }
   }
 
   // --- type class instances for standard types
-  object Instances {
+  //
+  object instances {
 
     implicit val stringWriter: JsonWriter[String] = (value: String) => JsString(value)
 
@@ -70,16 +72,10 @@ object JsonWriter {
       case Some(value) => writer.write(value)
     }
 
-    implicit def someWriter[A](implicit optionWriter: JsonWriter[Option[A]]): JsonWriter[Some[A]] =
-      optionWriter.asInstanceOf[JsonWriter[Some[A]]] // someWriter is the optionWriter cast to JsonWriter[Some[A]]
+    implicit def seqWriter[A](implicit writer: JsonWriter[A]): JsonWriter[Seq[A]] =
+      (elems: Seq[A]) => JsArray(elems.toList.map(writer.write))
 
-    implicit def noneWriter[A](implicit optionWriter: JsonWriter[Option[A]]): JsonWriter[None.type] =
-      optionWriter.asInstanceOf[JsonWriter[None.type]] // noneWriter is the optionWriter cast to JsonWriter[None.type]
+    implicit def mapWriter[A](implicit writer: JsonWriter[A]): JsonWriter[Map[String, A]] =
+      (bindings: Map[String, A]) => JsObject(bindings.mapValues(writer.write))
   }
-
-  implicit def seqWriter[A](implicit writer: JsonWriter[A]): JsonWriter[Seq[A]] =
-    (elems: Seq[A]) => JsArray(elems.toList.map(writer.write))
-
-  implicit def mapWriter[A](implicit writer: JsonWriter[A]): JsonWriter[Map[String, A]] =
-    (bindings: Map[String, A]) => JsObject(bindings.mapValues(writer.write))
 }

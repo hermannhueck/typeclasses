@@ -1,8 +1,8 @@
 package typeclasses._02_my_json.domain
 
-import typeclasses._02_my_json.lib.JsonWriter.JsonWriterOps
-import typeclasses._02_my_json.lib.{JsObject, JsonWriter}
-import typeclasses._02_my_json.lib.JsonWriter.Instances._
+import typeclasses._02_my_json.lib._
+import JsonWriter.instances._
+import JsonWriter.syntax._
 
 final case class Person(name: String, married: Boolean, age: Int, email: String, children: Seq[String])
 

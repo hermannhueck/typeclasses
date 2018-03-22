@@ -1,10 +1,7 @@
 package typeclasses._02_my_json
 
 import typeclasses._02_my_json.domain.Person
-import typeclasses._02_my_json.domain.Person.personWriter
-import typeclasses._02_my_json.lib.{JsNull, Json}
-import typeclasses._02_my_json.lib.JsonWriter.Instances._
-import typeclasses._02_my_json.lib.JsonWriter.JsonWriterOps
+import typeclasses._02_my_json.lib._
 
 object Main extends App {
 
@@ -13,58 +10,98 @@ object Main extends App {
   val john = Person("John", true, 34, "john@example.com", List("Helen", "Carlie", "Maria"))
   val dave = Person("Dave", false, 45, "dave@example.com", List())
 
-  println("\n===== Using interface object with primitive Json values ...")
+  {
+    println("\n----- Using interface object with primitive values ...")
 
-  printJson(Json.toJson("a String"))
-  printJson(Json.toJson(42))
-  printJson(Json.toJson(false))
-  printJson(JsNull)
+    import JsonWriter.instances._
 
-  println("\n===== Using interface object with Option[String] ...")
+    printJson(Json.toJson("a String"))
+    printJson(Json.toJson(42))
+    printJson(Json.toJson(false))
+    printJson(JsNull)
+  }
 
-  val jsOptionalStr = Json.toJson(Option("some String"))(optionWriter(stringWriter))
-  printJson(jsOptionalStr)
-  val jsOptionalNullStr = Json.toJson[Option[String]](Option(null))
-  printJson(jsOptionalNullStr)
-  val jsSomeStr = Json.toJson(Some("some String"))(someWriter)
-  printJson(jsSomeStr)
-  val jsSomeStr2 = Json.toJson(Some("some String"))
-  printJson(jsSomeStr2)
-  val jsNoString = Json.toJson[Option[String]](None)
-  printJson(jsNoString)
+  {
+    println("\n----- Using interface object with Option[String] ...")
 
-  println("\n===== Using interface object with Person and Option[Person] ...")
+    import JsonWriter.instances._
 
-  val jsJohn = Json.toJson(john)(personWriter)
-  printJson(jsJohn)
-  val jsDave = Json.toJson(dave)
-  printJson(jsDave)
-  val jsSomeDave = Json.toJson(Some(dave))
-  printJson(jsSomeDave)
-  val jsNoPerson = Json.toJson[Option[Person]](None)
-  printJson(jsNoPerson)
+    val jsSomeStr = Json.toJson(Option("some String"))
+    printJson(jsSomeStr)
+    val jsSomeStr2 = Json.toJson[Option[String]](Some("some String")) // avoid Some.apply, use Option.apply instead
+    printJson(jsSomeStr2)
+    val jsNoString = Json.toJson(Option.empty[String])
+    printJson(jsNoString)
+    val jsNoString2 = Json.toJson[Option[String]](None) // avoid None, use Option.empty instead
+    printJson(jsNoString2)
+  }
 
-  println("\n===== Using interface syntax with String and Option[String] ...")
+  {
+    println("\n----- Using interface object with Person and Option[Person] ...")
 
-  val jsStr2 = "another String".toJson(stringWriter)
-  printJson(jsStr2)
-  val jsStr3 = "yet another String".toJson
-  printJson(jsStr3)
-  val jsSomeStr3 = Some("yet another String").toJson
-  printJson(jsSomeStr3)
-  val jsNoString2 = None.asInstanceOf[Option[String]].toJson
-  printJson(jsNoString2)
+    import JsonWriter.instances._
+    import Person._
 
-  println("\n===== Using interface syntax with Person and Option[Person] ...")
+    val jsDave = Json.toJson(dave)
+    printJson(jsDave)
+    val jsSomeDave = Json.toJson(Option(dave))
+    printJson(jsSomeDave)
+    val jsSomeDave2 = Json.toJson[Option[Person]](Some(dave)) // avoid Some.apply, use Option.apply instead
+    printJson(jsSomeDave2)
+    val jsNoPerson = Json.toJson(Option.empty[Person])
+    printJson(jsNoPerson)
+    val jsNoPerson2 = Json.toJson[Option[Person]](None) // avoid None, use Option.empty instead
+    printJson(jsNoPerson2)
+  }
 
-  val jsJohn2 = john.toJson(personWriter)
-  printJson(jsJohn2)
-  val jsDave2 = dave.toJson
-  printJson(jsDave2)
-  val jsSomeDave2 = Some(dave).toJson
-  printJson(jsSomeDave2)
-  val jsNoPerson2 = None.asInstanceOf[Option[Person]].toJson
-  printJson(jsNoPerson2)
+  {
+    println("\n----- Using interface syntax with primitive values ...")
 
-  println("\n=====\n")
+    import JsonWriter.instances._
+    import JsonWriter.syntax._
+
+    printJson("a String".toJson)
+    printJson(42.toJson)
+    printJson(false.toJson)
+    printJson(JsNull)
+  }
+
+  {
+    println("\n----- Using interface syntax with String and Option[String] ...")
+
+    import JsonWriter.instances._
+    import JsonWriter.syntax._
+
+    val jsStr = "yet another String".toJson
+    printJson(jsStr)
+    val jsSomeStr = Option("yet another String").toJson
+    printJson(jsSomeStr)
+    val jsSomeStr2 = Some("yet another String").asInstanceOf[Option[String]].toJson // avoid Some.apply, use Option.apply instead
+    printJson(jsSomeStr2)
+    val jsNoString = Option.empty[String].toJson
+    printJson(jsNoString)
+    val jsNoString2 = None.asInstanceOf[Option[String]].toJson // avoid None, use Option.empty instead
+    printJson(jsNoString2)
+  }
+
+  {
+    println("\n----- Using interface syntax with Person and Option[Person] ...")
+
+    import JsonWriter.instances._
+    import JsonWriter.syntax._
+    import Person._
+
+    val jsDave = dave.toJson
+    printJson(jsDave)
+    val jsSomeDave = Option(dave).toJson
+    printJson(jsSomeDave)
+    val jsSomeDave2 = Some(dave).asInstanceOf[Option[Person]].toJson // avoid Some.apply, use Option.apply instead
+    printJson(jsSomeDave2)
+    val jsNoPerson = Option.empty[Person].toJson
+    printJson(jsNoPerson)
+    val jsNoPerson2 = None.asInstanceOf[Option[Person]].toJson // avoid None, use Option.empty instead
+    printJson(jsNoPerson2)
+  }
+
+  println("\n-----\n")
 }
