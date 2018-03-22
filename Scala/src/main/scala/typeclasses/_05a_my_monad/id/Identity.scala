@@ -15,6 +15,5 @@ object Identity {
     def flatMap[B](f: A => Identity[B])(implicit monad: Monad[Identity]): Identity[B] = monad.flatMap(id)(f)
     def flatten(implicit monad: Monad[Identity]): Identity[A] = monad.flatten(id.asInstanceOf[Identity[Identity[A]]])
     def map[B](f: A => B)(implicit monad: Monad[Identity]): Identity[B] = monad.map(id)(f)
-    def fmap[B](f: A => B)(implicit monad: Monad[Identity]): Identity[B] = monad.fmap(id)(f)
   }
 }
