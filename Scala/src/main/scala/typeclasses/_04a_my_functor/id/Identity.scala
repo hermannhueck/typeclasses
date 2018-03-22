@@ -2,7 +2,7 @@ package typeclasses._04a_my_functor.id
 
 import typeclasses._04a_my_functor.lib.Functor
 
-final case class Identity[T](value: T)
+final case class Identity[A](value: A)
 
 object Identity {
 
@@ -10,8 +10,8 @@ object Identity {
     override def map[A, B](fa: Identity[A])(f: A => B): Identity[B] = Identity(f(fa.value))
   }
 
-  implicit class IdentityFunctor[T](id: Identity[T]) {
-    def map[U](f: T => U)(implicit functor: Functor[Identity]): Identity[U] = functor.map(id)(f)
-    def fmap[U](f: T => U)(implicit functor: Functor[Identity]): Identity[U] = functor.fmap(id)(f)
+  implicit class IdentityFunctor[A](id: Identity[A]) {
+    def map[B](f: A => B)(implicit functor: Functor[Identity]): Identity[B] = functor.map(id)(f)
+    def fmap[B](f: A => B)(implicit functor: Functor[Identity]): Identity[B] = functor.map(id)(f)
   }
 }

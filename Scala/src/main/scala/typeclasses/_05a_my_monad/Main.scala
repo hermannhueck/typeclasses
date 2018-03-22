@@ -5,131 +5,145 @@ import typeclasses._05a_my_monad.lib.Monad
 
 object Main extends App {
 
+  println
+  println("----- Using Monad[A].apply")
+
   {
     println
 
-    import typeclasses._05a_my_monad.id.Identity.identityMonad
+    import Identity.identityMonad
 
-    val myId = Monad[Identity].pure(32)
-    println(s"-- pure: $myId")
+    val myId = Monad[Identity].pure(32) // or: Identity(32)
+    println(s"-- Monad[Identity].pure: $myId")
 
     val mappedId = Monad[Identity].map(myId)(_ + 10)
-    println(s"-- map: $mappedId")
+    println(s"-- Monad[Identity].map: $mappedId")
 
     val flatMappedId = Monad[Identity].flatMap(myId)(x => Identity(x + 10))
-    println(s"-- flatMap: $flatMappedId")
+    println(s"-- Monad[Identity].flatMap: $flatMappedId")
 
-    val flattenedId = Monad[Identity].flatten(Identity(myId))
-    println(s"-- flatten: $flattenedId")
+    val unFlattenedId: Identity[Identity[Int]] = Identity(myId)
+    val flattenedId = Monad[Identity].flatten(unFlattenedId)
+    println(s"-- Monad[Identity].flatten: $flattenedId")
   }
 
   {
     println
 
-    import typeclasses._05a_my_monad.lib.Monad.instances._
+    import Monad.instances._
 
-    val myOpt = Option(32)
-    println(s"-- Option(32): $myOpt")
+    val myOpt = Monad[Option].pure(32)
+    println(s"-- Monad[Option].pure: $myOpt")
     val myNone = Option.empty[Int]
     println(s"-- Option.empty: $myNone")
 
     val mappedOpt = Monad[Option].map(myOpt)(_ + 10)
-    println(s"-- map: $mappedOpt")
+    println(s"-- Monad[Option].map: $mappedOpt")
     val mappedNone = Monad[Option].map(myNone)(_ + 10)
-    println(s"-- map $mappedNone")
+    println(s"-- Monad[Option].map $mappedNone")
 
     val flatMappedOpt = Monad[Option].flatMap(myOpt)(x => Option(x + 10))
-    println(s"-- flatMap: $flatMappedOpt")
+    println(s"-- Monad[Option].flatMap: $flatMappedOpt")
     val flatMappedNone = Monad[Option].flatMap(myNone)(x => Option(x + 10))
-    println(s"-- flatMap $flatMappedNone")
+    println(s"-- Monad[Option].flatMap $flatMappedNone")
 
-    val flattenedOpt = Monad[Option].flatten(myOpt.map(Option(_)))
-    println(s"-- flatten: $flattenedOpt")
-    val flattenedNone = Monad[Option].flatten(myNone.map(Option(_)))
-    println(s"-- flatten: $flattenedNone")
+    val unFlattenedOpt: Option[Option[Int]] = myOpt.map(Option(_))
+    val flattenedOpt = Monad[Option].flatten(unFlattenedOpt)
+    println(s"-- Monad[Option].flatten: $flattenedOpt")
+    val unFlattenedNone: Option[Option[Int]] = myNone.map(Option(_))
+    val flattenedNone = Monad[Option].flatten(unFlattenedNone)
+    println(s"-- Monad[Option].flatten: $flattenedNone")
   }
 
   {
     println
 
-    import typeclasses._05a_my_monad.lib.Monad.instances._
+    import Monad.instances._
 
     val myList = List(32, 33, 34)
-    println(s"-- List(32, 33, 34): $myList")
+    println(s"-- List.apply: $myList")
 
     val mappedList = Monad[List].map(myList)(_ + 10)
-    println(s"-- map: $mappedList")
+    println(s"-- Monad[List].map: $mappedList")
 
     val flatMappedList = Monad[List].flatMap(myList)(x => List(x + 10))
-    println(s"-- flatMap: $flatMappedList")
+    println(s"-- Monad[List].flatMap: $flatMappedList")
 
-    val flattenedList = Monad[List].flatten(myList.map(List(_)))
-    println(s"-- flatten: $flattenedList")
+    val unFlattenedList: List[List[Int]] = myList.map(List(_))
+    val flattenedList = Monad[List].flatten(unFlattenedList)
+    println(s"-- Monad[List].flatten: $flattenedList")
   }
+
+  println
+  println("----- Using Monad.syntax")
 
   {
     println
 
-    import typeclasses._05a_my_monad.id.Identity.identityMonad
+    import Identity.identityMonad
     import Monad.pure
 
     val myId = 32.pure[Identity]
-    println(s"-- pure: $myId")
+    println(s"-- Monad.pure: $myId")
 
     val mappedId = myId.map(_ + 10)
-    println(s"-- map: $mappedId")
+    println(s"-- Monad[Identity].map (via extension function): $mappedId")
 
     val flatMappedId = myId.flatMap(x => (x + 10).pure[Identity])
-    println(s"-- flatMap: $flatMappedId")
+    println(s"-- Monad[Identity].flatMap (via extension function): $flatMappedId")
 
-    val flattenedId = myId.map(_.pure[Identity]).flatten
-    println(s"-- flatten: $flattenedId")
+    val unFlattenedId: Identity[Identity[Int]] = myId.map(_.pure[Identity])
+    val flattenedId = unFlattenedId.flatten
+    println(s"-- Monad[Identity].flatten (via extension function): $flattenedId")
   }
 
   {
     println
 
-    import typeclasses._05a_my_monad.lib.Monad.instances._
+    import Monad.instances._
     import Monad.pure
 
     val myOpt = 32.pure[Option]
-    println(s"-- pure: $myOpt")
+    println(s"-- Monad.pure: $myOpt")
     val myNone = Option.empty[Int]
     println(s"-- Option.empty: $myNone")
 
     val mappedOpt = myOpt.map(_ + 10)
-    println(s"-- map: $mappedOpt")
+    println(s"-- Option.map: $mappedOpt")
     val mappedNone = myNone.map(_ + 10)
-    println(s"-- map $mappedNone")
+    println(s"-- Option.map $mappedNone")
 
     val flatMappedOpt = myOpt.flatMap(x => (x + 10).pure[Option])
-    println(s"-- flatMap: $flatMappedOpt")
+    println(s"-- Option.flatMap: $flatMappedOpt")
     val flatMappedNone = myNone.flatMap(x => (x + 10).pure[Option])
-    println(s"-- flatMap $flatMappedNone")
+    println(s"-- Option.flatMap $flatMappedNone")
 
-    val flattenedOpt = myOpt.map(_.pure[Option]).flatten
-    println(s"-- flatten: $flattenedOpt")
-    val flattenedNone = myNone.map(_.pure[Option]).flatten
-    println(s"-- flatten: $flattenedNone")
+    val unFlattenedOpt: Option[Option[Int]] = myOpt.map(_.pure[Option])
+    val flattenedOpt = unFlattenedOpt.flatten
+    println(s"-- Option.flatten: $flattenedOpt")
+    val unFlattenedNone: Option[Option[Int]] = myNone.map(_.pure[Option])
+    val flattenedNone = unFlattenedNone.flatten
+    println(s"-- Option.flatten: $flattenedNone")
   }
 
   {
     println
 
-    import typeclasses._05a_my_monad.lib.Monad.instances._
+    import Monad.instances._
     import Monad.pure
 
     val myList = List(32, 33, 34)
-    println(s"-- List(32, 33, 34): $myList")
+    println(s"-- List.apply: $myList")
 
     val mappedList = myList.map(_ + 10)
-    println(s"-- map: $mappedList")
+    println(s"-- List.map: $mappedList")
 
     val flatMappedList = myList.flatMap(x => (x + 10).pure[List])
-    println(s"-- flatMap: $flatMappedList")
+    println(s"-- List.flatMap: $flatMappedList")
 
-    val flattenedList = myList.map(_.pure[List]).flatten
-    println(s"-- flatten: $flattenedList")
+    val unFlattenedList: List[List[Int]] = myList.map(_.pure[List])
+    val flattenedList = unFlattenedList.flatten
+    println(s"-- List.flatten: $flattenedList")
   }
 
   println
