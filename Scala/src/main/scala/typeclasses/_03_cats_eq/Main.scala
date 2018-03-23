@@ -1,6 +1,6 @@
 package typeclasses._03_cats_eq
 
-object CatsEq extends App {
+object Main extends App {
 
   println("\n--> Scala programming error ...\n")
 

@@ -1,6 +1,6 @@
 package typeclasses._01b_cats_show
 
-object CatsShow extends App {
+object Main extends App {
 
   import cats.Show
 
@@ -41,12 +41,7 @@ object CatsShow extends App {
 
   import cats.instances.option._
 
-  println(Option("abc").show)
-  // println(Some("abc").show)   // this doesn't work
-  val opt: Option[String] = Some("abc") // this works!
-  println(opt.show)
-  val opt2: Option[String] = None // this works only if the type of opt2 is specified
-  println(opt2.show)
+  println(Option("abc").show) // don't use Some or None! If you do, you have to cast them to Option
   println(Option.empty[String].show)
 
   // -------------------------
@@ -82,12 +77,18 @@ object CatsShow extends App {
   println("\n--> using show for Cat ...\n")
 
   import typeclasses._01b_cats_show.domain.Cat
+  import cats.instances.list._
 
   val mizzi = Cat("Mizzi", 1, "black and white")
   val garfield = Cat("Garfield", 38, "ginger and black")
 
   println(mizzi.show)
   println(garfield.show)
+
+  println(Option(mizzi).show)
+  println(Option(garfield).show)
+
+  println(List(mizzi, garfield).show)
 
   println
 }
