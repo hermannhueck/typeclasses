@@ -48,7 +48,10 @@ object Main extends App {
       l1.zip(l2) map { case (x, y) => f(x, y) }
   }
 
-  val result = List(1, 2, 3).zipWith(List(10, 20, 30))(_ + _)
+  val l1 = List(1, 2, 3)
+  val l2 = List(10, 20, 30)
+
+  val result = l1.zipWith(l2)(_ + _)
   println(result) // --> List(11, 22, 33)
 
   println
