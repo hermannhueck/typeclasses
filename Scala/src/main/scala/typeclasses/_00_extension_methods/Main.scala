@@ -44,13 +44,8 @@ object Main extends App {
 
   implicit class ListExtensions[A](l1: List[A]) {
 
-    def zipWith[B, C](l2: List[B])(f: (A, B) => C): List[C] = zipWith_(l1, l2)(f)
-
-    private def zipWith_[B, C](l1: List[A], l2: List[B])(f: (A, B) => C): List[C] = (l1, l2) match {
-      case (Nil, _) => Nil
-      case (_, Nil) => Nil
-      case (x :: xs, y :: ys) => f(x, y) :: zipWith_(xs, ys)(f)
-    }
+    def zipWith[B, C](l2: List[B])(f: (A, B) => C): List[C] =
+      l1.zip(l2) map { case (x, y) => f(x, y) }
   }
 
   val result = List(1, 2, 3).zipWith(List(10, 20, 30))(_ + _)
