@@ -6,10 +6,10 @@ import           Data.Time
 import           Data.Time.Calendar
 
 import           Cat
-import           Printable
-
 import           Json
+import           MyFunctors
 import           Person
+import           Printable
 
 dayOf :: Integer -> Int -> Int -> Day
 dayOf year month day = fromJust $ fromGregorianValid year month day
@@ -128,10 +128,61 @@ mainEq = do
   print $ Just mizzi == Just garfield
 
 
+myList = [1, 2, 3, 4, 5]
+mySome = Just 5
+myNone :: Maybe Integer
+myNone = Nothing
+myId = Identity 5
+myPair = Pair "foo" 5
+myPair' = Pair' 3 5
+
+mainFunctors :: IO ()
+mainFunctors = do
+  putStrLn "=========== mainFunctors"
+
+  putStrLn "--- mapping List"
+  print myList
+  print $ map (\x -> x * 2) myList -- map function of List
+  print $ map (*2) myList
+  print $ fmap (\x -> x * 2) myList -- fmap function of List functor
+  print $ fmap (*2) myList
+  print $ (*2) <$> myList -- <$> is an alias for fmap (infix operator)
+  print $ fmap (^2) myList
+  print $ (^2) <$> myList
+
+  putStrLn "--- mapping Maybe"
+  putStrLn "Maybe doesn't provide a map function, use fmap instead"
+  print mySome
+  print myNone
+  print $ fmap (*2) mySome -- fmap function of Maybe functor
+  print $ fmap (*2) myNone
+  print $ (^2) <$> mySome -- <$> is an alias for fmap (infix operator)
+  print $ (^2) <$> myNone
+
+  putStrLn "--- mapping Identity"
+  print myId
+  print $ fmap (\x -> x * 2) myId
+  print $ fmap (*2) myId
+  print $ (*2) <$> myId
+  print $ fmap (^2) myId
+  print $ (^2) <$> myId
+
+  putStrLn "--- mapping Pair"
+  print myPair
+  print $ fmap (*2) myPair
+  print $ (^2) <$> myPair
+
+  putStrLn "--- mapping Pair'"
+  print myPair'
+  print $ fmap (*2) myPair'
+  print $ (^2) <$> myPair'
+
+
 main :: IO ()
 main = do
-  -- mainPrintable
-  -- mainShow
-  -- mainJson
-  -- mainEq
+  mainPrintable
+  mainShow
+  mainJson
+  mainEq
+  mainFunctors
   putStrLn "==========="
