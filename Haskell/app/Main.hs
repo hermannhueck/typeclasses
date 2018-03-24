@@ -34,7 +34,7 @@ garfield = Cat "Garfield" 38 "ginger and black"
 
 mainPrintable :: IO ()
 mainPrintable = do
-  putStrLn "==========="
+  putStrLn "=========== mainPrintable"
   putStrLn "----- formatting Strings ..."
   putStrLn "Cats are meeting here!"
   putStrLn $ format "Cats are meeting here!"
@@ -56,6 +56,23 @@ mainPrintable = do
   pprintt garfield
   putStrLn "-----"
 
+
+mainShow :: IO ()
+mainShow = do
+  putStrLn "=========== mainShow"
+  putStrLn $ show 123
+  putStrLn $ show 123.45
+  print 123.45
+  putStrLn $ show False
+  putStrLn $ show $ utcTime 2018 3 8 16 38 19
+  print $ utcTime 2018 3 8 16 38 19
+  now <- getCurrentTime
+  putStrLn $ show now
+  putStrLn $ show mizzi
+  putStrLn $ show garfield
+  print garfield
+
+
 showJson :: Json -> IO()
 showJson json = putStrLn str
   where str = show json ++ "\n   --   " ++ stringify json
@@ -65,7 +82,7 @@ dave = Person "Dave" False 45 "dave@eample.com" []
 
 mainJson :: IO ()
 mainJson = do
-  putStrLn "==========="
+  putStrLn "=========== mainJson"
   showJson $ toJson False
   showJson $ toJson (42 :: Integer)
   showJson $ toJson (42 :: Int)
@@ -79,24 +96,10 @@ mainJson = do
   showJson $ toJson $ Just dave
   showJson $ toJson (Nothing :: Maybe Person)
 
-mainShow :: IO ()
-mainShow = do
-  putStrLn "==========="
-  putStrLn $ show 123
-  putStrLn $ show 123.45
-  print 123.45
-  putStrLn $ show False
-  putStrLn $ show $ utcTime 2018 3 8 16 38 19
-  print $ utcTime 2018 3 8 16 38 19
-  now <- getCurrentTime
-  putStrLn $ show now
-  putStrLn $ show mizzi
-  putStrLn $ show garfield
-  print garfield
 
 mainEq :: IO ()
 mainEq = do
-  putStrLn "==========="
+  putStrLn "=========== mainEq"
   putStrLn "--> Scala programming error, Haskell compile error ..."
   -- List(1, 2, 3).map(Option(_)).filter(_ == 1)    ==> Scala: programming error, compiler gives just a warning
   -- filter (== 1) $ map Just [1,2,3]               ==> Haskell: the code doesn't compile
@@ -124,9 +127,11 @@ mainEq = do
   print $ Just mizzi == Just mizzi
   print $ Just mizzi == Just garfield
 
+
 main :: IO ()
 main = do
   -- mainPrintable
+  -- mainShow
   -- mainJson
-  mainShow
-  mainEq
+  -- mainEq
+  putStrLn "==========="
