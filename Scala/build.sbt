@@ -1,7 +1,7 @@
 name := "typeclasses"
 version := "0.0.1-SNAPSHOT"
 
-scalaVersion := "2.12.4"
+scalaVersion := "2.12.5"
 
 scalacOptions ++= Seq(
   "-encoding", "UTF-8",    // source files are in UTF-8
@@ -15,8 +15,8 @@ scalacOptions ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.typelevel" %% "cats-core" % "1.0.1",
-  "org.scalatest" %% "scalatest" % "3.0.4" % Test
+  "org.typelevel" %% "cats-core" % "1.1.0",
+  "org.scalatest" %% "scalatest" % "3.0.5" % Test
 )
 
 // addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.3")
