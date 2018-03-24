@@ -1,6 +1,6 @@
-package typeclasses._02_my_json.domain
+package typeclasses._02__my_json.domain
 
-import typeclasses._02_my_json.lib._
+import typeclasses._02__my_json.lib._
 import JsonWriter.instances._
 import JsonWriter.syntax._
 

@@ -1,4 +1,4 @@
-package typeclasses._01a_my_show.lib
+package typeclasses._01a_my_printable.lib
 
 import java.util.Date
 

@@ -1,7 +1,7 @@
-package typeclasses._02_my_json
+package typeclasses._02__my_json
 
-import typeclasses._02_my_json.domain.Person
-import typeclasses._02_my_json.lib._
+import typeclasses._02__my_json.domain.Person
+import typeclasses._02__my_json.lib._
 
 object Main extends App {
 

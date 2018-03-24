@@ -1,4 +1,4 @@
-package typeclasses._02_my_json.lib
+package typeclasses._02__my_json.lib
 
 // A very simple JSON AST
 //

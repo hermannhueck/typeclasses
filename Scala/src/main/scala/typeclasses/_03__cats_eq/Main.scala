@@ -1,4 +1,4 @@
-package typeclasses._03_cats_eq
+package typeclasses._03__cats_eq
 
 object Main extends App {
 
