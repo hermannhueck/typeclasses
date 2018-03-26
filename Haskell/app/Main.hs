@@ -2,12 +2,13 @@ module Main where
 
 import           Data.Fixed
 import           Data.Maybe         (fromJust)
+import           Data.Monoid
 import           Data.Time
 import           Data.Time.Calendar
 
 import           Cat
+import           FunctorsAndMonads
 import           Json
-import           MyFunctors
 import           Person
 import           Printable
 
@@ -134,7 +135,8 @@ myNone :: Maybe Integer
 myNone = Nothing
 myId = Identity 5
 myPair = Pair "foo" 5
-myPair' = Pair' 3 5
+myPair2 = Pair2 3 5
+
 
 mainFunctors :: IO ()
 mainFunctors = do
@@ -172,10 +174,38 @@ mainFunctors = do
   print $ fmap (*2) myPair
   print $ (^2) <$> myPair
 
-  putStrLn "--- mapping Pair'"
-  print myPair'
-  print $ fmap (*2) myPair'
-  print $ (^2) <$> myPair'
+  putStrLn "--- mapping Pair2"
+  print myPair2
+  print $ fmap (*2) myPair2
+  print $ (^2) <$> myPair2
+
+
+mainMonads :: IO ()
+mainMonads = do
+  putStrLn "=========== mainMonads"
+
+  putStrLn "--- flatMapping/binding List"
+  print myList
+  print $ map (\x -> [x + 2, x * 2]) myList
+  print $ myList >>= (\x -> [x + 2, x * 2])
+
+  putStrLn "--- flatMapping/binding Maybe"
+  print mySome
+  print myNone
+  print $ fmap (\x -> Just (x * 2)) mySome
+  print $ mySome >>= (\x -> Just (x * 2))
+  print $ fmap (\x -> Just (x * 2)) myNone
+  print $ myNone >>= (\x -> Just (x * 2))
+
+  putStrLn "--- flatMapping/binding Identity"
+  print myId
+  print $ fmap (\x -> Identity (x * 2)) myId
+  print $ myId >>= (\x -> Identity (x * 2))
+
+  putStrLn "--- flatMapping/binding Pair"
+  print myPair
+  print $ fmap (\x -> Pair "bar" (x * 2)) myPair
+  print $ myPair >>= (\x -> Pair "bar" (x * 2))
 
 
 main :: IO ()
@@ -185,4 +215,5 @@ main = do
   mainJson
   mainEq
   mainFunctors
+  mainMonads
   putStrLn "==========="

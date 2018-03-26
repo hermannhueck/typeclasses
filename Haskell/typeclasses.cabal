@@ -35,7 +35,7 @@ library
       , Cat
       , Json
       , Person
-      , MyFunctors
+      , FunctorsAndMonads
   other-modules:
       Paths_typeclasses
   default-language: Haskell2010
