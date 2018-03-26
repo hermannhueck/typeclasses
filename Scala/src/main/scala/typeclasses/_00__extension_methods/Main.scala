@@ -15,11 +15,13 @@ object Main extends App {
   val triple5: Int = 5.triple
   val squared5: Int = 5.square
   val cubed5: Int = 5.cube
+  val doubledSquared5 = 5.double.square
   
   println(s"5.double = ${double5}")
   println(s"5.triple = ${triple5}")
   println(s"5.square = ${squared5}")
   println(s"5.cube = ${cubed5}")
+  println(s"5.doubledSquared5 = ${doubledSquared5}")
 
 
   println("\n----- Type enrichment for type Cat ...")
