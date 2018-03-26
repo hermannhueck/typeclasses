@@ -19,6 +19,9 @@ object Main extends App {
     val mappedId = Monad[Identity].map(myId)(_ + 10)
     println(s"-- Monad[Identity].map: $mappedId")
 
+    val appedId = Monad[Identity].ap(Identity[Int => Int](_ + 10))(myId)
+    println(s"-- Monad[Identity].ap: $appedId")
+
     val flatMappedId = Monad[Identity].flatMap(myId)(x => Identity(x + 10))
     println(s"-- Monad[Identity].flatMap: $flatMappedId")
 
@@ -41,6 +44,11 @@ object Main extends App {
     println(s"-- Monad[Option].map: $mappedOpt")
     val mappedNone = Monad[Option].map(myNone)(_ + 10)
     println(s"-- Monad[Option].map $mappedNone")
+
+    val appedOpt = Monad[Option].ap(Option[Int => Int](_ + 10))(myOpt)
+    println(s"-- Monad[Option].ap: $appedOpt")
+    val appedNone = Monad[Option].ap(Option[Int => Int](_ + 10))(myNone)
+    println(s"-- Monad[Option].ap $appedNone")
 
     val flatMappedOpt = Monad[Option].flatMap(myOpt)(x => Option(x + 10))
     println(s"-- Monad[Option].flatMap: $flatMappedOpt")
@@ -66,6 +74,9 @@ object Main extends App {
     val mappedList = Monad[List].map(myList)(_ + 10)
     println(s"-- Monad[List].map: $mappedList")
 
+    val appedList = Monad[List].ap(List[Int => Int](_ + 10, _ * 2))(myList)
+    println(s"-- Monad[List].ap: $appedList")
+
     val flatMappedList = Monad[List].flatMap(myList)(x => List(x + 10))
     println(s"-- Monad[List].flatMap: $flatMappedList")
 
@@ -89,6 +100,9 @@ object Main extends App {
     val mappedId = myId.map(_ + 10)
     println(s"-- Monad[Identity].map (via extension function): $mappedId")
 
+    val appedId = myId.ap(Identity[Int => Int](_ + 10))
+    println(s"-- Monad[Identity].ap (via extension function): $appedId")
+
     val flatMappedId = myId.flatMap(x => (x + 10).pure[Identity])
     println(s"-- Monad[Identity].flatMap (via extension function): $flatMappedId")
 
@@ -102,6 +116,7 @@ object Main extends App {
 
     import Monad.instances._
     import Monad.pure
+    import Monad.syntax._
 
     val myOpt = 32.pure[Option]
     println(s"-- Monad.pure: $myOpt")
@@ -112,6 +127,11 @@ object Main extends App {
     println(s"-- Option.map: $mappedOpt")
     val mappedNone = myNone.map(_ + 10)
     println(s"-- Option.map $mappedNone")
+
+    val appedOpt = myOpt.ap(Option[Int => Int](_ + 10))
+    println(s"-- Monad[Option].ap (via extension function): $appedOpt")
+    val appedNone = myNone.ap(Option[Int => Int](_ + 10))
+    println(s"-- Monad[Option].ap (via extension function): $appedNone")
 
     val flatMappedOpt = myOpt.flatMap(x => (x + 10).pure[Option])
     println(s"-- Option.flatMap: $flatMappedOpt")
@@ -131,12 +151,16 @@ object Main extends App {
 
     import Monad.instances._
     import Monad.pure
+    import Monad.syntax._
 
     val myList = List(32, 33, 34)
     println(s"-- List.apply: $myList")
 
     val mappedList = myList.map(_ + 10)
     println(s"-- List.map: $mappedList")
+
+    val appedList = myList.ap(List[Int => Int](_ + 10, _ * 2))
+    println(s"-- Monad[List].ap (via extension function): $appedList")
 
     val flatMappedList = myList.flatMap(x => (x + 10).pure[List])
     println(s"-- List.flatMap: $flatMappedList")

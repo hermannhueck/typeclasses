@@ -2,7 +2,7 @@ package typeclasses._05a_my_monad.id
 
 import typeclasses._05a_my_monad.lib.Monad
 
-final case class Identity[T](value: T)
+final case class Identity[A](value: A)
 
 object Identity {
 
@@ -15,5 +15,6 @@ object Identity {
     def flatMap[B](f: A => Identity[B])(implicit monad: Monad[Identity]): Identity[B] = monad.flatMap(id)(f)
     def flatten(implicit monad: Monad[Identity]): Identity[A] = monad.flatten(id.asInstanceOf[Identity[Identity[A]]])
     def map[B](f: A => B)(implicit monad: Monad[Identity]): Identity[B] = monad.map(id)(f)
+    def ap[B](ff: Identity[A => B])(implicit monad: Monad[Identity]): Identity[B] = monad.ap(ff)(id)
   }
 }
