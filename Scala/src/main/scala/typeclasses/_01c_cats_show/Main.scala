@@ -1,4 +1,4 @@
-package typeclasses._01b_cats_show
+package typeclasses._01c_cats_show
 
 object Main extends App {
 
@@ -76,7 +76,7 @@ object Main extends App {
   // -------------------------
   println("\n--> using show for Cat ...\n")
 
-  import typeclasses._01b_cats_show.domain.Cat
+  import typeclasses._01c_cats_show.domain.Cat
   import cats.instances.list._
 
   val mizzi = Cat("Mizzi", 1, "black and white")
