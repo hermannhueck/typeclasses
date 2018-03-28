@@ -8,7 +8,7 @@ scalacOptions ++= Seq(
   "-deprecation",          // warn about use of deprecated APIs
   "-unchecked",            // warn about unchecked type parameters
   "-feature",              // warn about misused language features
-  "-Xlint",                // enable handy linter warnings
+  // "-Xlint",                // enable handy linter warnings
   // "-Xfatal-warnings",      // turn compiler warnings into errors
   // "-Xlog-implicits",       // log resolution of implicits
   "-Ypartial-unification"  // allow the compiler to unify type constructors of different arities
