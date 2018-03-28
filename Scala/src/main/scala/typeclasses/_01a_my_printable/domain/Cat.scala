@@ -8,10 +8,10 @@ final case class Cat(name: String, age: Int, color: String)
 object Cat {
 
   implicit val catPrintable: Printable[Cat] = new Printable[Cat] {
-    override def format(cat: Cat): String = {
-      val name  = Printable.format(cat.name)
-      val age   = Printable.format(cat.age)
-      val color = Printable.format(cat.color)
+    override def stringify(cat: Cat): String = {
+      val name  = Printable.stringify(cat.name)
+      val age   = Printable.stringify(cat.age)
+      val color = Printable.stringify(cat.color)
       s"$name is a $age year-old $color cat."
     }
   }

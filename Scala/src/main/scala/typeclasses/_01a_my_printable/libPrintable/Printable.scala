@@ -5,7 +5,7 @@ import java.util.Date
 // the type class, a trait with at least one type parameter
 //
 trait Printable[A] {
-  def format(value: A): String
+  def stringify(value: A): String
 }
 
 // The type class companion object
@@ -14,27 +14,37 @@ object Printable {
 
   // interface object methods for the type class
   //
-  def format[A](value: A)(implicit p: Printable[A]): String = p.format(value)
-  def print[A](value: A)(implicit p: Printable[A]): Unit = println(format(value))
+  def stringify[A](value: A)(implicit p: Printable[A]): String = p.stringify(value)
+  def print[A](value: A)(implicit p: Printable[A]): Unit = println(stringify(value))
 
   // the type class instances for standard types
   //
   object instances {
 
     implicit val stringPrintable: Printable[String] = new Printable[String] {
-      override def format(value: String): String = value
+      override def stringify(value: String): String = value
     }
 
     implicit val booleanPrintable: Printable[Boolean] = new Printable[Boolean] {
-      override def format(value: Boolean): String = value.toString
+      override def stringify(value: Boolean): String = value.toString
     }
 
     implicit val intPrintable: Printable[Int] = new Printable[Int] {
-      override def format(value: Int): String = value.toString
+      override def stringify(value: Int): String = value.toString
     }
 
     implicit val datePrintable: Printable[Date] = new Printable[Date] {
-      override def format(value: Date): String = value.toString
+      override def stringify(value: Date): String = value.toString
+    }
+
+    // a generic instance is a def with a type parameter A and an implicit Printable[A]
+    // that means: if you can stringify an A, you also can stringify Option[A]
+    //
+    implicit def optionPrintable[A](implicit pA: Printable[A]): Printable[Option[A]] = new Printable[Option[A]] {
+      override def stringify(optA: Option[A]): String =
+        optA.map(pA.stringify)
+          .map(s => s"Option($s)")
+          .getOrElse("None")
     }
   }
 
@@ -43,8 +53,8 @@ object Printable {
   object syntax {
 
     implicit class PrintableOps[A](value: A) {
-      def format(implicit p: Printable[A]): String = p.format(value)
-      def print(implicit p: Printable[A]): Unit = println(format)
+      def stringify(implicit p: Printable[A]): String = p.stringify(value)
+      def print(implicit p: Printable[A]): Unit = println(stringify)
     }
   }
 }

@@ -14,16 +14,16 @@ object Main extends App {
   {
     // overrides PrintableInstances.intPrintable which is in scope but has lower priority
     implicit val intPrintable: Printable[Int] = new Printable[Int] {
-      override def format(value: Int): String = "How many cats? " + value.toString
+      override def stringify(value: Int): String = "How many cats? " + value.toString
     }
 
     // overrides PrintableInstances.datePrintable which is in scope but has lower priority
     implicit val datePrintable: Printable[Date] = new Printable[Date] {
-      override def format(value: Date): String = "Date of meeting: " + value.toString
+      override def stringify(value: Date): String = "Date of meeting: " + value.toString
     }
 
     def myPrint[A](value: A)(implicit printable: Printable[A]): Unit =
-      println(printable.format(value))
+      println(printable.stringify(value))
 
     println("\n-----")
 
@@ -39,7 +39,7 @@ object Main extends App {
   {
     println("---> Using the Printable companion object to format and print ...")
 
-    println(Printable.format("Cats are meeting here!"))
+    println(Printable.stringify("Cats are meeting here!"))
     Printable.print("Cats are meeting here!")
     Printable.print(2)
     Printable.print(new Date)
@@ -69,6 +69,20 @@ object Main extends App {
     new Date().print
     mizzi.print
     garfield.print
+  }
+
+  {
+    println("\n--> stringifying/printing Option[A] ...")
+
+    import Printable.syntax._
+
+    Option("Cats are meeting here!").print
+    Option.empty[String].print
+    Option(2).print
+    Option(new Date()).print
+    Option(mizzi).print
+    Option(garfield).print
+    Option.empty[Cat].print
   }
 
   println("-----\n")
