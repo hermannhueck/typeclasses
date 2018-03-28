@@ -1,9 +1,9 @@
-package typeclasses._01b_my_printable_without_imports
+package typeclasses._01b_my_printable_noimports
 
 import java.util.Date
 
-import typeclasses._01b_my_printable_without_imports.domain.Cat
-import typeclasses._01b_my_printable_without_imports.libPrintable._
+import typeclasses._01b_my_printable_noimports.domain.Cat
+import typeclasses._01b_my_printable_noimports.libPrintable._
 
 object Main extends App {
 

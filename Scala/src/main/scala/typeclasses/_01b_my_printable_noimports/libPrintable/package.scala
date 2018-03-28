@@ -1,4 +1,4 @@
-package typeclasses._01b_my_printable_without_imports
+package typeclasses._01b_my_printable_noimports
 
 package object libPrintable {
 
