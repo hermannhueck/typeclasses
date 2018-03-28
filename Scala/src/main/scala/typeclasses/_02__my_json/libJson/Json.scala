@@ -1,17 +1,17 @@
-package typeclasses._02__my_json.lib
+package typeclasses._02__my_json.libJson
 
 // A very simple JSON AST
 //
 sealed trait Json {
-  def stringify: String = this match {
+  def toJsonString: String = this match {
     case JsNull => "null"
     case JsBoolean(bool) => bool.toString
     case JsNumber(num) => num.toString
     case JsString(str) => "\"" + str + "\""
-    case JsArray(elems) => elems.map(_.stringify).mkString("[", ", ", "]")
-    case JsObject(bindings) => bindings.map {
-      case (key, value) => "\"" + key + "\": " + value.stringify
-    }.mkString("{", ", ", "}")
+    case JsArray(elems) => elems.map(_.toJsonString).mkString("[", ", ", "]")
+    case JsObject(bindings) => bindings map {
+      case (key, value) => "\"" + key + "\": " + value.toJsonString
+    } mkString("{", ", ", "}")
   }
 }
 
@@ -67,9 +67,11 @@ object JsonWriter {
 
     // unfortunately works only for Option[A], not for Some[A] or None.type
     // the reason is that JsonWriter[A] is invariant (could be covariant with other drawbacks)
-    implicit def optionWriter[A](implicit writer: JsonWriter[A]): JsonWriter[Option[A]] = {
-      case None => JsNull
-      case Some(value) => writer.write(value)
+    implicit def optionWriter[A](implicit writer: JsonWriter[A]): JsonWriter[Option[A]] = new JsonWriter[Option[A]] {
+      override def write(optA: Option[A]): Json = optA match {
+        case None => JsNull
+        case Some(a) => writer.write(a)
+      }
     }
 
     implicit def seqWriter[A](implicit writer: JsonWriter[A]): JsonWriter[Seq[A]] =

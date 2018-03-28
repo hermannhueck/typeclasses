@@ -1,4 +1,4 @@
-package typeclasses._01a_my_printable.lib
+package typeclasses._01a_my_printable.libPrintable
 
 import java.util.Date
 

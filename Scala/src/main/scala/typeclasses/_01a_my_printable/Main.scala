@@ -3,7 +3,7 @@ package typeclasses._01a_my_printable
 import java.util.Date
 
 import typeclasses._01a_my_printable.domain.Cat
-import typeclasses._01a_my_printable.lib.Printable
+import typeclasses._01a_my_printable.libPrintable.Printable
 import Printable.instances._
 
 object Main extends App {

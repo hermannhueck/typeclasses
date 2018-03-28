@@ -1,11 +1,11 @@
 package typeclasses._02__my_json
 
 import typeclasses._02__my_json.domain.Person
-import typeclasses._02__my_json.lib._
+import typeclasses._02__my_json.libJson._
 
 object Main extends App {
 
-  private def printJson(json: Json): Unit = println(s"$json\n   --   ${json.stringify}")
+  private def printJson(json: Json): Unit = println(s"$json\n   --   ${json.toJsonString}")
 
   val john = Person("John", true, 34, "john@example.com", List("Helen", "Carlie", "Maria"))
   val dave = Person("Dave", false, 45, "dave@example.com", List())
