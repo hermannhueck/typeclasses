@@ -4,7 +4,8 @@ import java.util.Date
 
 import typeclasses._01b_my_printable_oneimport.domain._
 
-// This the only (wildcard) import needed to use libPrintable
+// This is the only (wildcard) import needed to use libPrintable
+//
 import typeclasses._01b_my_printable_oneimport.libPrintable._
 
 object Main extends App {
