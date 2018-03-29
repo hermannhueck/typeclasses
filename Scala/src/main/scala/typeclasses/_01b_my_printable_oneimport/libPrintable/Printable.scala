@@ -17,17 +17,11 @@ trait Printable[A] {
 //
 object Printable {
 
-  // def apply[A: Printable]: Printable[A] = implicitly[Printable[A]] // same as:
-  // def apply[A](implicit printable: Printable[A]): Printable[A] = printable
-
-  // interface object methods for the type class
-  // here using a context bound + implicitly instead of an implicit parameter
+  // Printable.apply[A] or Printable[A]
+  // makes the implicit Printable[A] explicitly available
   //
-  // def stringify[A: Printable](value: A): String = Printable[A].stringify(value) // same as:
-  // def stringify[A: Printable](value: A): String = implicitly[Printable[A]].stringify(value)
-  // def print[A: Printable](value: A): Unit = println(stringify(value))
-  def stringify[A](value: A)(implicit p: Printable[A]): String = p.stringify(value)
-  def print[A](value: A)(implicit p: Printable[A]): Unit = println(stringify(value))
+  def apply[A: Printable]: Printable[A] = implicitly[Printable[A]] // same as:
+  // def apply[A](implicit printable: Printable[A]): Printable[A] = printable
 
   // the type class instances for standard types
   //
@@ -45,7 +39,8 @@ object Printable {
   //
   implicit def optionPrintable[A: Printable]: Printable[Option[A]] =
     (optA: Option[A]) => optA
-      .map(implicitly[Printable[A]].stringify)
+      .map(Printable[A].stringify) // same as:
+      // .map(implicitly[Printable[A]].stringify)
       .map(s => s"Option($s)")
       .getOrElse("None")
 }

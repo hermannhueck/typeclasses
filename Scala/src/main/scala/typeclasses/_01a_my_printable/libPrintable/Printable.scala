@@ -15,7 +15,7 @@ object Printable {
   // interface object methods for the type class
   //
   def stringify[A](value: A)(implicit p: Printable[A]): String = p.stringify(value)
-  def print[A](value: A)(implicit p: Printable[A]): Unit = println(stringify(value))
+  def pprint[A](value: A)(implicit p: Printable[A]): Unit = println(stringify(value))
 
   // the type class instances for standard types
   //
@@ -54,7 +54,7 @@ object Printable {
 
     implicit class PrintableOps[A](value: A) {
       def stringify(implicit p: Printable[A]): String = p.stringify(value)
-      def print(implicit p: Printable[A]): Unit = println(stringify)
+      def pprint(implicit p: Printable[A]): Unit = println(stringify)
     }
   }
 }

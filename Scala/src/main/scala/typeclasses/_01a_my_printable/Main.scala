@@ -40,11 +40,11 @@ object Main extends App {
     println("---> Using the Printable companion object to format and print ...")
 
     println(Printable.stringify("Cats are meeting here!"))
-    Printable.print("Cats are meeting here!")
-    Printable.print(2)
-    Printable.print(new Date)
-    Printable.print(mizzi)
-    Printable.print(garfield)
+    Printable.pprint("Cats are meeting here!")
+    Printable.pprint(2)
+    Printable.pprint(new Date)
+    Printable.pprint(mizzi)
+    Printable.pprint(garfield)
   }
 
   {
@@ -52,11 +52,11 @@ object Main extends App {
 
     import Printable._
 
-    print("Cats are meeting here!")
-    print(2)
-    print(new Date)
-    print(mizzi)
-    print(garfield)
+    pprint("Cats are meeting here!")
+    pprint(2)
+    pprint(new Date)
+    pprint(mizzi)
+    pprint(garfield)
   }
 
   {
@@ -64,11 +64,11 @@ object Main extends App {
 
     import Printable.syntax._
 
-    "Cats are meeting here!".print
-    2.print
-    new Date().print
-    mizzi.print
-    garfield.print
+    "Cats are meeting here!".pprint
+    2.pprint
+    new Date().pprint
+    mizzi.pprint
+    garfield.pprint
   }
 
   {
@@ -76,13 +76,13 @@ object Main extends App {
 
     import Printable.syntax._
 
-    Option("Cats are meeting here!").print
-    Option.empty[String].print
-    Option(2).print
-    Option(new Date()).print
-    Option(mizzi).print
-    Option(garfield).print
-    Option.empty[Cat].print
+    Option("Cats are meeting here!").pprint
+    Option.empty[String].pprint
+    Option(2).pprint
+    Option(new Date()).pprint
+    Option(mizzi).pprint
+    Option(garfield).pprint
+    Option.empty[Cat].pprint
   }
 
   println("-----\n")

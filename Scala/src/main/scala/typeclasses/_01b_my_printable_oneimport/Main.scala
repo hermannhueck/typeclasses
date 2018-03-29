@@ -3,6 +3,8 @@ package typeclasses._01b_my_printable_oneimport
 import java.util.Date
 
 import typeclasses._01b_my_printable_oneimport.domain._
+
+// This the only (wildcard) import needed to use libPrintable
 import typeclasses._01b_my_printable_oneimport.libPrintable._
 
 object Main extends App {
@@ -13,35 +15,34 @@ object Main extends App {
   {
     println("\n--> This looks a bit nicer if we import the methods of the companion object ...")
 
-    import Printable.print   // Without this import the standard print method is preferred.
-
-    print("Cats are meeting here!")
-    print(2)
-    print(new Date)
-    print(mizzi)
-    print(garfield)
+    pprint("Cats are meeting here!")
+    pprint(2)
+    pprint(new Date)
+    pprint(mizzi)
+    pprint(garfield)
+    println(stringify(garfield))
   }
 
   {
     println("\n--> now using extension methods (type enrichment) ...")
 
-    "Cats are meeting here!".print()
-    2.print()
-    new Date().print()
-    mizzi.print()
-    garfield.print()
+    "Cats are meeting here!".pprint()
+    2.pprint()
+    new Date().pprint()
+    mizzi.pprint()
+    garfield.pprint()
   }
 
   {
     println("\n--> stringifying/printing Option[A] ...")
 
-    Option("Cats are meeting here!").print()
-    Option.empty[String].print()
-    Option(2).print()
-    Option(new Date()).print()
-    Option(mizzi).print()
-    Option(garfield).print()
-    Option.empty[Cat].print()
+    Option("Cats are meeting here!").pprint()
+    Option.empty[String].pprint()
+    Option(2).pprint()
+    Option(new Date()).pprint()
+    Option(mizzi).pprint()
+    Option(garfield).pprint()
+    Option.empty[Cat].pprint()
   }
 
   println("-----\n")
