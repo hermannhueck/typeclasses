@@ -38,23 +38,23 @@ mainPrintable = do
   putStrLn "=========== mainPrintable"
   putStrLn "----- formatting Strings ..."
   putStrLn "Cats are meeting here!"
-  putStrLn $ format "Cats are meeting here!"
-  pprintt "Cats are meeting here!"
+  putStrLn $ stringify "Cats are meeting here!"
+  pprint "Cats are meeting here!"
   putStrLn "----- formatting Numbers ..."
-  putStrLn $ format (2 :: Int)
-  pprintt (2 :: Int)
-  putStrLn $ format (2 :: Double)
-  pprintt (2 :: Double)
+  putStrLn $ stringify (2 :: Int)
+  pprint (2 :: Int)
+  putStrLn $ stringify (2 :: Double)
+  pprint (2 :: Double)
   putStrLn "----- formatting UTCTimes ..."
-  putStrLn $ format $ utcTime 2018 3 8 16 38 19
-  pprintt $ utcTime 2018 3 8 16 38 19
+  putStrLn $ stringify $ utcTime 2018 3 8 16 38 19
+  pprint $ utcTime 2018 3 8 16 38 19
   now <- getCurrentTime
-  pprintt now
+  pprint now
   putStrLn "----- formatting Cats ..."
-  putStrLn $ format mizzi
-  pprintt mizzi
-  putStrLn $ format garfield
-  pprintt garfield
+  putStrLn $ stringify mizzi
+  pprint mizzi
+  putStrLn $ stringify garfield
+  pprint garfield
   putStrLn "-----"
 
 
@@ -76,7 +76,7 @@ mainShow = do
 
 showJson :: Json -> IO()
 showJson json = putStrLn str
-  where str = show json ++ "\n   --   " ++ stringify json
+  where str = show json ++ "\n   --   " ++ toJsonString json
 
 john = Person "John" True 34 "john@example.com" ["Helen", "Carlie", "Maria"]
 dave = Person "Dave" False 45 "dave@eample.com" []

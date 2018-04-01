@@ -16,14 +16,14 @@ data Json
   | JsObject (M.Map String Json)
   deriving (Eq, Show)
 
-stringify :: Json -> String
-stringify JsNull           = "null"
-stringify (JsBoolean bool) = show bool
-stringify (JsNumber num)   = show num
-stringify (JsString str)   = str
-stringify (JsArray elems) = "[" ++ intercalate ", " (map stringify elems) ++ "]"
-stringify (JsObject bindings) =
-  let mapStringString = M.map stringify bindings :: M.Map String String
+toJsonString :: Json -> String
+toJsonString JsNull           = "null"
+toJsonString (JsBoolean bool) = show bool
+toJsonString (JsNumber num)   = show num
+toJsonString (JsString str)   = str
+toJsonString (JsArray elems) = "[" ++ intercalate ", " (map toJsonString elems) ++ "]"
+toJsonString (JsObject bindings) =
+  let mapStringString = M.map toJsonString bindings :: M.Map String String
       tuples = M.toList mapStringString :: [(String, String)]
       strings = map (\(x, y) -> x ++ ": " ++ y) tuples :: [String]
       oneString = intercalate ", " strings :: String

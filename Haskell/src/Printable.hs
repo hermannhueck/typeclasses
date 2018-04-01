@@ -9,22 +9,22 @@ import           Data.Time
 --
 class Printable a where
 
-    format :: a -> String
+    stringify :: a -> String
 
-    pprintt :: a -> IO ()
-    pprintt x = putStrLn $ format x
+    pprint :: a -> IO ()
+    pprint x = putStrLn $ stringify x
 
 
 -- some type class instances for common types
 --
 instance Printable String where
-    format = intersperse '-'
+    stringify = intersperse '-'
 
 instance Printable Int where
-    format = show
+    stringify = show
 
 instance Printable Double where
-    format = show
+    stringify = show
 
 instance Printable UTCTime where
-    format time = "The exact date is: " ++ formatTime defaultTimeLocale "%F, %T (%Z)" time
+    stringify time = "The exact date is: " ++ formatTime defaultTimeLocale "%F, %T (%Z)" time

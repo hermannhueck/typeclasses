@@ -15,4 +15,4 @@ data Cat = Cat
 -- type class instances for doamin classes
 --
 instance Printable Cat where
-    format cat = "Cat {name=" ++ name cat ++ ", age=" ++ show (age cat) ++ ", color=" ++ color cat ++ "}"
+    stringify cat = "Cat {name=" ++ name cat ++ ", age=" ++ show (age cat) ++ ", color=" ++ color cat ++ "}"
