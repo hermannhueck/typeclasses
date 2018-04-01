@@ -39,7 +39,7 @@ object Printable {
 
   implicit val datePrintable: Printable[Date] = (value: Date) => value.toString
 
-  
+
   // a generic instance for Option[A] is a def with a type
   // parameter A and an implicit Printable[A]. That means:
   // if you can stringify an A, you also can stringify Option[A]
