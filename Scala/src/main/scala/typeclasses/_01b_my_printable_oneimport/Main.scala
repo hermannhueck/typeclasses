@@ -18,32 +18,37 @@ object Main extends App {
 
     pprint("Cats are meeting here!")
     pprint(2)
+    pprint(false)
     pprint(new Date)
     pprint(mizzi)
     pprint(garfield)
     println(stringify(garfield))
   }
 
+  // import scala.language.reflectiveCalls
+
   {
     println("\n--> now using extension methods (type enrichment) ...")
 
-    "Cats are meeting here!".pprint()
-    2.pprint()
-    new Date().pprint()
-    mizzi.pprint()
-    garfield.pprint()
+    "Cats are meeting here!".pprint
+    2.pprint
+    false.pprint
+    new Date().pprint
+    mizzi.pprint
+    garfield.pprint
   }
 
   {
     println("\n--> stringifying/printing Option[A] ...")
 
-    Option("Cats are meeting here!").pprint()
-    Option.empty[String].pprint()
-    Option(2).pprint()
-    Option(new Date()).pprint()
-    Option(mizzi).pprint()
-    Option(garfield).pprint()
-    Option.empty[Cat].pprint()
+    Option("Cats are meeting here!").pprint
+    Option.empty[String].pprint
+    Option(2).pprint
+    Option(false).pprint
+    Option(new Date()).pprint
+    Option(mizzi).pprint
+    Option(garfield).pprint
+    Option.empty[Cat].pprint
   }
 
   println("-----\n")
