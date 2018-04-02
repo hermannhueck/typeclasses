@@ -14,7 +14,7 @@ object Main extends App {
   val garfield = Cat("Garfield", 38, "ginger and black")
 
   {
-    println("\n--> This looks a bit nicer if we import the methods of the companion object ...")
+    println("\n--> Interface object methods ...")
 
     pprint("Cats are meeting here!")
     pprint(2)
