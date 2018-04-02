@@ -1,7 +1,7 @@
-package typeclasses._02__my_json
+package typeclasses._02a_my_json
 
-import typeclasses._02__my_json.domain.Person
-import typeclasses._02__my_json.libJson._
+import typeclasses._02a_my_json.domain.Person
+import typeclasses._02a_my_json.libJson._
 
 object Main extends App {
 
@@ -55,6 +55,22 @@ object Main extends App {
   }
 
   {
+    println("\n----- Using interface object with List[A] ...")
+
+    import JsonWriter.instances._
+    import Person._
+
+    val ints = Json.toJson(List(1, 2, 3, 4, 5))
+    printJson(ints)
+    val noInts = Json.toJson(List.empty[Int])
+    printJson(noInts)
+    val jsPersons = Json.toJson(List(john, dave))
+    printJson(jsPersons)
+    val jsNoPersons = Json.toJson(List.empty[Person])
+    printJson(jsNoPersons)
+  }
+
+  {
     println("\n----- Using interface syntax with primitive values ...")
 
     import JsonWriter.instances._
@@ -101,6 +117,18 @@ object Main extends App {
     printJson(jsNoPerson)
     val jsNoPerson2 = None.asInstanceOf[Option[Person]].toJson // avoid None, use Option.empty instead
     printJson(jsNoPerson2)
+  }
+
+  {
+    println("\n----- Using interface syntax with List[A] ...")
+
+    import JsonWriter.instances._
+    import JsonWriter.syntax._
+    import Person._
+
+    printJson(List(1, 2, 3, 4, 5).toJson)
+    printJson(List(john, dave).toJson)
+    printJson(List.empty[Person].toJson)
   }
 
   println("\n-----\n")

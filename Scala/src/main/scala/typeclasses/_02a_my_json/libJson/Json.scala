@@ -1,4 +1,4 @@
-package typeclasses._02__my_json.libJson
+package typeclasses._02a_my_json.libJson
 
 // A very simple JSON AST
 //
@@ -73,6 +73,9 @@ object JsonWriter {
         case Some(a) => writer.write(a)
       }
     }
+
+    implicit def listWriter[A](implicit writer: JsonWriter[A]): JsonWriter[List[A]] =
+      (elems: List[A]) => JsArray(elems.map(writer.write))
 
     implicit def seqWriter[A](implicit writer: JsonWriter[A]): JsonWriter[Seq[A]] =
       (elems: Seq[A]) => JsArray(elems.toList.map(writer.write))
