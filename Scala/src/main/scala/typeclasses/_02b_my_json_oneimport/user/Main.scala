@@ -1,4 +1,4 @@
-package typeclasses._02b_my_json_oneimport
+package typeclasses._02b_my_json_oneimport.user
 
 import typeclasses._02b_my_json_oneimport.domain.Person
 import typeclasses._02b_my_json_oneimport.libJson._
@@ -61,7 +61,7 @@ object Main extends App {
     printJson(jsNoPersons)
   }
 
-  // import scala.language.reflectiveCalls
+  import scala.language.reflectiveCalls
 
   {
     println("\n----- Using interface syntax with primitive values ...")

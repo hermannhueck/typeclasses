@@ -1,10 +1,10 @@
-package typeclasses._01a_my_printable
+package typeclasses._01a_my_printable.user
 
 import java.util.Date
 
 import typeclasses._01a_my_printable.domain.Cat
 import typeclasses._01a_my_printable.libPrintable.Printable
-import Printable.instances._
+import typeclasses._01a_my_printable.libPrintable.Printable.instances._
 
 object Main extends App {
 

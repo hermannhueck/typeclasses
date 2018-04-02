@@ -1,4 +1,4 @@
-package typeclasses._02a_my_json
+package typeclasses._02a_my_json.user
 
 import typeclasses._02a_my_json.domain.Person
 import typeclasses._02a_my_json.libJson._
