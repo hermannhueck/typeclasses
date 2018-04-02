@@ -40,9 +40,9 @@ object Printable {
   implicit val datePrintable: Printable[Date] = (value: Date) => value.toString
 
 
-  // a generic instance for Option[A] is a def with a type
-  // parameter A and an implicit Printable[A]. That means:
-  // if you can stringify an A, you also can stringify Option[A]
+  // generic instances
+
+  // if you can stringify an A, you can also stringify Option[A]
   //
   implicit def optionPrintable[A: Printable]: Printable[Option[A]] =
     (optA: Option[A]) => optA
@@ -50,4 +50,11 @@ object Printable {
       // .map(implicitly[Printable[A]].stringify)
       .map(s => s"Option($s)")
       .getOrElse("None")
+
+  // if you can stringify an A, you can also stringify List[A]
+  //
+  implicit def listPrintable[A: Printable]: Printable[List[A]] =
+    (as: List[A]) => as
+      .map(Printable[A].stringify)
+      .mkString("List(", ", ", ")")
 }

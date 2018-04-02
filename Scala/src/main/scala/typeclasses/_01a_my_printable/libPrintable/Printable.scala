@@ -37,14 +37,24 @@ object Printable {
       override def stringify(value: Date): String = value.toString
     }
 
-    // a generic instance is a def with a type parameter A and an implicit Printable[A]
-    // that means: if you can stringify an A, you also can stringify Option[A]
+
+    // generic instances
+
+    // if you can stringify an A, you can also stringify Option[A]
     //
     implicit def optionPrintable[A](implicit pA: Printable[A]): Printable[Option[A]] = new Printable[Option[A]] {
-      override def stringify(optA: Option[A]): String =
-        optA.map(pA.stringify)
+      override def stringify(maybeA: Option[A]): String =
+        maybeA.map(pA.stringify)
           .map(s => s"Option($s)")
           .getOrElse("None")
+    }
+
+    // if you can stringify an A, you can also stringify List[A]
+    //
+    implicit def listPrintable[A](implicit pA: Printable[A]): Printable[List[A]] = new Printable[List[A]] {
+      override def stringify(as: List[A]): String =
+        as.map(pA.stringify)
+          .mkString("List(", ", ", ")")
     }
   }
 

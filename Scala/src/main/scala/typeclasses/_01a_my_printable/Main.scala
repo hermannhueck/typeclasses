@@ -31,17 +31,19 @@ object Main extends App {
 
     myPrint("Cats are meeting here!")
     myPrint(2)
+    myPrint(false)
     myPrint(new Date)
     myPrint(mizzi)
     myPrint(garfield)
   }
 
   {
-    println("---> Using the Printable companion object to format and print ...")
+    println("---> Using the Printable companion object to stringify and print ...")
 
     println(Printable.stringify("Cats are meeting here!"))
     Printable.pprint("Cats are meeting here!")
     Printable.pprint(2)
+    Printable.pprint(false)
     Printable.pprint(new Date)
     Printable.pprint(mizzi)
     Printable.pprint(garfield)
@@ -54,6 +56,7 @@ object Main extends App {
 
     pprint("Cats are meeting here!")
     pprint(2)
+    pprint(false)
     pprint(new Date)
     pprint(mizzi)
     pprint(garfield)
@@ -66,6 +69,7 @@ object Main extends App {
 
     "Cats are meeting here!".pprint
     2.pprint
+    false.pprint
     new Date().pprint
     mizzi.pprint
     garfield.pprint
@@ -79,10 +83,24 @@ object Main extends App {
     Option("Cats are meeting here!").pprint
     Option.empty[String].pprint
     Option(2).pprint
+    Option(false).pprint
     Option(new Date()).pprint
     Option(mizzi).pprint
     Option(garfield).pprint
     Option.empty[Cat].pprint
+  }
+
+  {
+    println("\n--> stringifying/printing List[A] ...")
+
+    import Printable.syntax._
+
+    List("Cats", "are", "meeting", "here", "!").pprint
+    List.empty[String].pprint
+    List(2, 3, 4).pprint
+    List(false, true, 2 == 3).pprint
+    List(mizzi, garfield).pprint
+    List.empty[Cat].pprint
   }
 
   println("-----\n")

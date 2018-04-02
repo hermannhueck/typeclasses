@@ -51,5 +51,16 @@ object Main extends App {
     Option.empty[Cat].pprint
   }
 
+  {
+    println("\n--> stringifying/printing List[A] ...")
+
+    List("Cats", "are", "meeting", "here", "!").pprint
+    List.empty[String].pprint
+    List(2, 3, 4).pprint
+    List(false, true, 2 == 3).pprint
+    List(mizzi, garfield).pprint
+    List.empty[Cat].pprint
+  }
+
   println("-----\n")
 }
