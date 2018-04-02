@@ -13,6 +13,7 @@ package object libPrintable {
   // def stringify[A](value: A)(implicit p: Printable[A]): String = p.stringify(value)
   // def pprint[A](value: A)(implicit p: Printable[A]): Unit = println(stringify(value))
 
+
   // 4 ways to provide interface syntax as extension methods
   // The implicit class converts   A => PrintableOps[A]
 
