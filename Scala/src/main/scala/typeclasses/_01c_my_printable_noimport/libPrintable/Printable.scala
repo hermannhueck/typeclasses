@@ -40,10 +40,11 @@ trait PrintableUtils {
   def stringify[A: Printable](value: A): String = Printable[A].stringify(value) // same as:
   def pprint[A: Printable](value: A): Unit = println(stringify(value))
 
-
   // pimp = type enrichment = extension methods
   implicit class PrintableOps[A: Printable](value: A) {
     def stringify: String = Printable[A].stringify(value)
     def pprint: Unit = println(stringify)
   }
+
+  // implicit def toPrintableOps[A: Printable](value: A): PrintableOps[A] = new PrintableOps[A](value)
 }
