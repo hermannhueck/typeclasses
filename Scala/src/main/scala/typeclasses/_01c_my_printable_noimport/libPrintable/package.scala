@@ -1,0 +1,3 @@
+package typeclasses._01c_my_printable_noimport
+
+package object libPrintable extends PrintableUtils

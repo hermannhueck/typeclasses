@@ -1,0 +1,15 @@
+package typeclasses._01c_my_printable_noimport.domain
+
+import typeclasses._01c_my_printable_noimport.libPrintable._
+
+case class Cat(name: String, age: Int, color: String)
+
+trait CatUtils {
+
+  implicit val catPrintable: Printable[Cat] = (cat: Cat) => {
+    val name = cat.name.stringify
+    val age = cat.age.stringify
+    val color = cat.color.stringify
+    s"$name is a $age year-old $color cat."
+  }
+}
