@@ -27,7 +27,7 @@ object Main extends App {
 
     println("\n-----")
 
-    println("---> Using the local method 'myPrint' and local Printable instances to print ...")
+    println("---> Using the local method 'myPrint' and local Printable instances to pprint ...")
 
     myPrint("Cats are meeting here!")
     myPrint(2)
@@ -35,10 +35,12 @@ object Main extends App {
     myPrint(new Date)
     myPrint(mizzi)
     myPrint(garfield)
+    myPrint(Option(2))
+    myPrint(Option(mizzi))
   }
 
   {
-    println("---> Using the Printable companion object to stringify and print ...")
+    println("---> Using the Printable companion object to stringify and pprint ...")
 
     println(Printable.stringify("Cats are meeting here!"))
     Printable.pprint("Cats are meeting here!")

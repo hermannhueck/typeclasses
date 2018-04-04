@@ -2,7 +2,7 @@ package typeclasses._00__extension_methods
 
 object Main extends App {
 
-  println("\n----- Type enrichment for type Int ...")
+  println("\n----- Pimpin' type Int ...")
 
   implicit class EnrichedInt(i: Int) {
     def double: Int = 2 * i
@@ -24,11 +24,11 @@ object Main extends App {
   println(s"5.doubledSquared5 = $doubledSquared5")
 
 
-  println("\n----- Type enrichment for type Cat ...")
+  println("\n----- Pimpin' type Cat ...")
 
   final case class Cat(name: String, age: Int, color: String)
 
-  implicit class EnrichedCat(c: Cat) {
+  implicit class PimpedCat(c: Cat) {
     def description: String = s"${c.name} is a ${c.age} year old ${c.color} colored cat."
     def describe(): Unit = println(c.description)
   }
@@ -42,12 +42,13 @@ object Main extends App {
   garfield.describe()
 
 
-  println("\n----- Type enrichment for type List ...")
+  println("\n----- Pimpin' type List ...")
 
-  implicit class EnrichedList[A](thisList: List[A]) {
+  implicit class PimpedList[A](xs: List[A]) {
 
-    def zipWith[B, C](otherList: List[B])(f: (A, B) => C): List[C] =
-      thisList.zip(otherList) map { case (x, y) => f(x, y) }
+    // Haskell's list provides zipWith, Scala lists don't.
+    def zipWith[B, C](ys: List[B])(f: (A, B) => C): List[C] =
+      xs zip ys map { case (x, y) => f(x, y) }
   }
 
   val l1 = List(1, 2, 3)

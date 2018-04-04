@@ -26,7 +26,7 @@ public class Cat {
 
     public static Printable<Cat> catPrintable = new Printable<Cat>() {
         @Override
-        public String format(Cat cat) {
+        public String stringify(Cat cat) {
             return cat.name + " is a " + cat.age + " year-old " + cat.color + " cat.";
         }
     };

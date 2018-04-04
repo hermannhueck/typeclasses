@@ -1,4 +1,4 @@
-package typeclasses._01c_cats_show.user
+package typeclasses._01d_cats_show.user
 
 object Main extends App {
 
@@ -77,7 +77,7 @@ object Main extends App {
   println("\n--> using show for Cat ...\n")
 
   import cats.instances.list._
-  import typeclasses._01c_cats_show.domain.Cat
+  import typeclasses._01d_cats_show.domain.Cat
 
   val mizzi = Cat("Mizzi", 1, "black and white")
   val garfield = Cat("Garfield", 38, "ginger and black")

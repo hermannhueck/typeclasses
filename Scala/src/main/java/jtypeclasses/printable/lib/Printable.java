@@ -1,21 +1,32 @@
 package jtypeclasses.printable.lib;
 
+import java.util.Optional;
+import java.util.function.Function;
+
 public interface Printable<A> {
 
-    String format(A value);
+    String stringify(A value);
 
 
-    static <A> String format(A value, Printable<A> printable) {
-        return printable.format(value);
+    static <A> String stringify(A value, Printable<A> printable) {
+        return printable.stringify(value);
     }
 
-    static <A> void print(A value, Printable<A> printable) {
-        System.out.println(format(value, printable));
+    static <A> void pprint(A value, Printable<A> printable) {
+        System.out.println(stringify(value, printable));
     }
 
     interface instances {
-        static Printable<Integer> intPrintable = Object::toString;
-        static Printable<Double> doublePrintable = Object::toString;
-        static Printable<String> stringPrintable = value -> value;
+
+        Printable<String> stringPrintable = value -> value;
+        Printable<Integer> intPrintable = Object::toString;
+        Printable<Double> doublePrintable = Object::toString;
+
+        static <X> Function<Optional<X>, String> optionalPrintable(Printable<X> printable) {
+            return opt -> opt
+                    .map(printable::stringify)
+                    .map(s -> "Optional(" + s + ")")
+                    .orElse("Optional.empty");
+        }
     }
 }
