@@ -40,17 +40,17 @@ mainPrintable = do
   putStrLn "Cats are meeting here!"
   putStrLn $ stringify "Cats are meeting here!"
   pprint "Cats are meeting here!"
-  putStrLn "----- formatting Numbers ..."
+  putStrLn "----- stringifying/pprinting Numbers ..."
   putStrLn $ stringify (2 :: Int)
   pprint (2 :: Int)
   putStrLn $ stringify (2 :: Double)
   pprint (2 :: Double)
-  putStrLn "----- formatting UTCTimes ..."
-  putStrLn $ stringify $ utcTime 2018 3 8 16 38 19
-  pprint $ utcTime 2018 3 8 16 38 19
+  putStrLn "----- stringifying/pprinting UTCTimes ..."
+  putStrLn $ stringify $ utcTime 2018 4 9 19 15 00
+  pprint $ utcTime 2018 4 9 19 15 01
   now <- getCurrentTime
   pprint now
-  putStrLn "----- formatting Cats ..."
+  putStrLn "----- stringifying/pprinting Cats ..."
   putStrLn $ stringify mizzi
   pprint mizzi
   putStrLn $ stringify garfield
@@ -65,8 +65,8 @@ mainShow = do
   putStrLn $ show 123.45
   print 123.45
   putStrLn $ show False
-  putStrLn $ show $ utcTime 2018 3 8 16 38 19
-  print $ utcTime 2018 3 8 16 38 19
+  putStrLn $ show $ utcTime 2018 4 9 19 15 00
+  print $ utcTime 2018 4 9 19 15 01
   now <- getCurrentTime
   putStrLn $ show now
   putStrLn $ show mizzi

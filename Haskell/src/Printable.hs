@@ -9,8 +9,10 @@ import           Data.Time
 --
 class Printable a where
 
+    -- stringify: signature
     stringify :: a -> String
 
+    -- pprint: signature + impl
     pprint :: a -> IO ()
     pprint x = putStrLn $ stringify x
 
