@@ -1,9 +1,8 @@
 package typeclasses._01c_my_printable_noimport
 
-import typeclasses._01c_my_printable_noimport.domain.CatUtils
 import typeclasses._01c_my_printable_noimport.libPrintable.PrintableUtils
 
-package object user extends PrintableUtils with CatUtils {
+package object user extends PrintableUtils {
 
   // In the users package object base trait utilities and implicits can be overridden.
 

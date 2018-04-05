@@ -4,7 +4,7 @@ import typeclasses._01c_my_printable_noimport.libPrintable._
 
 case class Cat(name: String, age: Int, color: String)
 
-trait CatUtils {
+object Cat {
 
   implicit val catPrintable: Printable[Cat] = (cat: Cat) => {
     val name = cat.name.stringify
