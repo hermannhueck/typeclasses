@@ -86,7 +86,6 @@ object Main extends App {
     println(result) // --> List(11, 22, 33)
   }
 
-
   println("\n----- Pimpin' type List with an implicit conversion (+ anonymous class):   defines an implicit View: List => PimpedList")
 
   {
@@ -94,7 +93,29 @@ object Main extends App {
     import scala.language.reflectiveCalls
 
     implicit def pimpList[A](xs: List[A]) = new {
-      def zipWith[B, C](ys: List[B])(f: (A, B) => C): List[C] = // Haskell provides a function zipWith for lists, Scala doesn't.
+      def zipWith[B, C](ys: List[B])(f: (A, B) => C): List[C] =
+        xs zip ys map { case (x, y) => f(x, y) }
+    }
+
+    val l1 = List(1, 2, 3)
+    val l2 = List(10, 20, 30)
+
+    val result = l1.zipWith(l2)(_ + _)
+    println(result) // --> List(11, 22, 33)
+  }
+
+  println("\n----- Pimpin' type List with an implicit conversion (using a structural type):   defines an implicit View: List => PimpedList")
+
+  {
+    import scala.language.implicitConversions
+    import scala.language.reflectiveCalls
+
+    type PIMP[A] = { // structural type
+      def zipWith[B, C](ys: List[B])(f: (A, B) => C): List[C]
+    }
+
+    implicit def pimpList[A](xs: List[A]): PIMP[A] = new {
+      def zipWith[B, C](ys: List[B])(f: (A, B) => C): List[C] =
         xs zip ys map { case (x, y) => f(x, y) }
     }
 
