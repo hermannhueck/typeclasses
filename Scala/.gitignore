@@ -9,8 +9,6 @@
 
 hs_err_pid*
 
-.DS_Store
-
 /activator*
 /.sbtserver
 .sbtserver
@@ -30,3 +28,5 @@ dist/*
 /bin/
 /.idea
 
+.DS_Store
+.vscode
