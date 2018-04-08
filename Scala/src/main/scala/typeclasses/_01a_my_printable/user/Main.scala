@@ -36,6 +36,7 @@ object Main extends App {
     myPrint(mizzi)
     myPrint(garfield)
     myPrint(Option(2))
+    myPrint(Option(new Date))
     myPrint(Option(mizzi))
   }
 
