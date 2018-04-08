@@ -1,4 +1,4 @@
-package typeclasses._00b_implicit_classes
+package typeclasses._00b_implicit_class
 
 object Main extends App {
 
