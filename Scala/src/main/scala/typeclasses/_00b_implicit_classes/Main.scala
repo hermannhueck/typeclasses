@@ -1,4 +1,4 @@
-package typeclasses._00__extension_methods
+package typeclasses._00b_implicit_classes
 
 object Main extends App {
 
