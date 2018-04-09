@@ -60,6 +60,7 @@ object Main extends App {
 
     import Printable._
 
+    println(stringify("Cats are meeting here!"))
     pprint("Cats are meeting here!")
     pprint(2)
     pprint(false)
@@ -75,6 +76,7 @@ object Main extends App {
 
     import Printable.syntax._
 
+    println("Cats are meeting here!".stringify)
     "Cats are meeting here!".pprint
     2.pprint
     false.pprint
@@ -111,7 +113,7 @@ object Main extends App {
     List.empty[String].pprint
     List(2, 3, 4).pprint
     List(false, true, 2 == 3).pprint
-    
+
     List(mizzi, garfield).pprint
     List.empty[Cat].pprint
   }

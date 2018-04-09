@@ -51,9 +51,9 @@ object Printable {
 
     // if you can stringify an A, you can also stringify List[A]
     //
-    implicit def listPrintable[A](implicit pA: Printable[A]): Printable[List[A]] = new Printable[List[A]] {
+    implicit def listPrintable[A](implicit lA: Printable[A]): Printable[List[A]] = new Printable[List[A]] {
       override def stringify(as: List[A]): String =
-        as.map(pA.stringify)
+        as.map(lA.stringify)
           .mkString("List(", ", ", ")")
     }
   }
