@@ -3,6 +3,7 @@ package typeclasses._00a_implicit_conversion
 object Main extends App {
 
   println
+  println("Implicit conversion: String => Int")
 
   {
     import scala.language.implicitConversions
@@ -17,6 +18,7 @@ object Main extends App {
   }
 
   println
+  println("Implicit conversion: Foo => Bar, defined in local scope")
 
   {
     import scala.language.implicitConversions
@@ -36,6 +38,7 @@ object Main extends App {
   }
 
   println
+  println("Implicit conversion: Foo => Bar, defined in companion object of Foo")
 
   {
     import scala.language.implicitConversions
@@ -61,6 +64,7 @@ object Main extends App {
   }
 
   println
+  println("Implicit conversion: Foo => Bar, defined in companion object of Bar")
 
   {
     import scala.language.implicitConversions
@@ -86,6 +90,7 @@ object Main extends App {
   }
 
   println
+  println("Implicit conversion: Foo[A] => Bar[A], defined in companion object of Foo")
 
   {
     import scala.language.implicitConversions
@@ -113,6 +118,7 @@ object Main extends App {
   }
 
   println
+  println("Implicit conversion: Foo[A] => Bar[A], defined in companion object of Bar")
 
   {
     import scala.language.implicitConversions
@@ -140,6 +146,7 @@ object Main extends App {
   }
 
   println
+  println("Implicit conversion: A => Bar[A], defined in companion object of Bar")
 
   {
     import scala.language.implicitConversions
