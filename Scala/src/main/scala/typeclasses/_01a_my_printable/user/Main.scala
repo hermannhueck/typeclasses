@@ -49,6 +49,7 @@ object Main extends App {
     Printable.pprint(2)
     Printable.pprint(false)
     Printable.pprint(new Date)
+
     Printable.pprint(mizzi)
     Printable.pprint(garfield)
     Printable.pprint(Option(garfield))
@@ -63,6 +64,7 @@ object Main extends App {
     pprint(2)
     pprint(false)
     pprint(new Date)
+
     pprint(mizzi)
     pprint(garfield)
     pprint(Option(garfield))
@@ -77,6 +79,7 @@ object Main extends App {
     2.pprint
     false.pprint
     new Date().pprint
+
     mizzi.pprint
     garfield.pprint
   }
@@ -93,6 +96,7 @@ object Main extends App {
     Option(false).pprint
     Option(new Date()).pprint
     Option.empty[Date].pprint
+
     Option(mizzi).pprint
     Option(garfield).pprint
     Option.empty[Cat].pprint
@@ -107,6 +111,7 @@ object Main extends App {
     List.empty[String].pprint
     List(2, 3, 4).pprint
     List(false, true, 2 == 3).pprint
+    
     List(mizzi, garfield).pprint
     List.empty[Cat].pprint
   }
