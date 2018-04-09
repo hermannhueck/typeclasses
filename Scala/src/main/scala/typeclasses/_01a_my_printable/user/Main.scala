@@ -33,10 +33,11 @@ object Main extends App {
     myPrint(2)
     myPrint(false)
     myPrint(new Date)
-    myPrint(mizzi)
-    myPrint(garfield)
     myPrint(Option(2))
     myPrint(Option(new Date))
+
+    myPrint(mizzi)
+    myPrint(garfield)
     myPrint(Option(mizzi))
   }
 
@@ -50,6 +51,7 @@ object Main extends App {
     Printable.pprint(new Date)
     Printable.pprint(mizzi)
     Printable.pprint(garfield)
+    Printable.pprint(Option(garfield))
   }
 
   {
@@ -63,6 +65,7 @@ object Main extends App {
     pprint(new Date)
     pprint(mizzi)
     pprint(garfield)
+    pprint(Option(garfield))
   }
 
   {
@@ -86,8 +89,10 @@ object Main extends App {
     Option("Cats are meeting here!").pprint
     Option.empty[String].pprint
     Option(2).pprint
+    Option.empty[String].pprint
     Option(false).pprint
     Option(new Date()).pprint
+    Option.empty[Date].pprint
     Option(mizzi).pprint
     Option(garfield).pprint
     Option.empty[Cat].pprint
