@@ -11,6 +11,7 @@ import scala.language.implicitConversions
 @implicitAmbiguous("More than one instance of type class Printable found for type ${A}")
 trait Printable[A] {
   def stringify(value: A): String
+  def pprint[B <: A](value: B): Unit = println(stringify(value))
 }
 
 // The type class companion object
