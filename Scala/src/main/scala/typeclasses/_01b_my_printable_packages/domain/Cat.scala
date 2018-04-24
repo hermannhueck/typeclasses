@@ -1,7 +1,7 @@
-package typeclasses._01a_my_printable.domain
+package typeclasses._01b_my_printable_packages.domain
 
-import typeclasses._01a_my_printable.libPrintable.Printable
-import typeclasses._01a_my_printable.libPrintable.Printable.instances._
+import typeclasses._01b_my_printable_packages.libPrintable.Printable
+import typeclasses._01b_my_printable_packages.libPrintable.Printable.instances._
 
 final case class Cat(name: String, age: Int, color: String)
 

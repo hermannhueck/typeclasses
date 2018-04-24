@@ -1,15 +1,14 @@
-package typeclasses._01c_my_printable_noimport.user
+package typeclasses._01c_my_printable_oneimport.user
 
 import java.util.Date
 
-import typeclasses._01c_my_printable_noimport.domain.Cat
+import typeclasses._01c_my_printable_oneimport.domain._
 
-// No import needed to use libPrintable - see package object
+// This is the only (wildcard) import needed to use libPrintable
+//
+import typeclasses._01c_my_printable_oneimport.libPrintable._
 
 object Main extends App {
-
-  // this local instance Printable[Date] conflicts with the package instance if defined
-  // implicit val localDatePrintable: Printable[Date] = (value: Date) => "THE LOCAL DATE IS ==> " + value.toString
 
   val mizzi = Cat("Mizzi", 1, "black")
   val garfield = Cat("Garfield", 38, "ginger and black")
@@ -29,20 +28,18 @@ object Main extends App {
   // import scala.language.reflectiveCalls
 
   {
-    println("\n--> now using our pimp (= extension methods, type enrichment) ...")
+    println("\n--> now using extension methods (type enrichment) ...")
 
     "Cats are meeting here!".pprint
     2.pprint
     false.pprint
     new Date().pprint
-    val stringifiedMizzi = mizzi.stringify
-    println(stringifiedMizzi)
     mizzi.pprint
     garfield.pprint
   }
 
   {
-    println("\n--> stringifying/pprinting Option[A] ...")
+    println("\n--> stringifying/printing Option[A] ...")
 
     Option("Cats are meeting here!").pprint
     Option.empty[String].pprint
@@ -55,7 +52,7 @@ object Main extends App {
   }
 
   {
-    println("\n--> stringifying/pprinting List[A] ...")
+    println("\n--> stringifying/printing List[A] ...")
 
     List("Cats", "are", "meeting", "here", "!").pprint
     List.empty[String].pprint

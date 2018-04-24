@@ -1,6 +1,6 @@
-package typeclasses._01c_my_printable_noimport
+package typeclasses._01d_my_printable_noimport
 
-import typeclasses._01c_my_printable_noimport.libPrintable.PrintableUtils
+import typeclasses._01d_my_printable_noimport.libPrintable.PrintableUtils
 
 package object user extends PrintableUtils {
 

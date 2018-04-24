@@ -1,6 +1,6 @@
-package typeclasses._01c_my_printable_noimport.domain
+package typeclasses._01d_my_printable_noimport.domain
 
-import typeclasses._01c_my_printable_noimport.libPrintable._
+import typeclasses._01d_my_printable_noimport.libPrintable._
 
 case class Cat(name: String, age: Int, color: String)
 
