@@ -1,4 +1,4 @@
-package typeclasses._01b_my_printable_implicitscope
+package typeclasses._01a_my_printable_localscope
 
 import java.util.Date
 
@@ -7,14 +7,17 @@ trait Printable[A] {
   def pprint(value: A): Unit = println(stringify(value))
 }
 
-// The type class companion object
-//
-object Printable {
+
+final case class Cat(name: String, age: Int, color: String)
+
+
+object Main extends App {
 
   // interface object methods for the type class
   //
   def stringify[A](value: A)(implicit p: Printable[A]): String = p.stringify(value)
   def pprint[A](value: A)(implicit p: Printable[A]): Unit = p.pprint(value)
+
 
   // the type class instances for standard types
   //
@@ -37,6 +40,11 @@ object Printable {
     override def stringify(value: Date): String = value.toString
   }
 
+  implicit val catPrintable: Printable[Cat] = new Printable[Cat] {
+    override def stringify(cat: Cat): String =
+      s"${cat.name} is a ${cat.age.toString} year-old ${cat.color} cat."
+  }
+
 
   // generic instances defined as defs, not vals
 
@@ -57,54 +65,21 @@ object Printable {
         .mkString("List(", ", ", ")")
   }
 
+
   // interface syntax methods as extension methods
   //
-  object syntax {
-
-    implicit class PrintableOps[A](value: A) {
-      def stringify(implicit p: Printable[A]): String = p.stringify(value)
-      def pprint(implicit p: Printable[A]): Unit = println(stringify)
-    }
+  implicit class PrintableOps[A](value: A) {
+    def stringify(implicit p: Printable[A]): String = p.stringify(value)
+    def pprint(implicit p: Printable[A]): Unit = println(stringify)
   }
-}
 
-final case class Cat(name: String, age: Int, color: String)
 
-object Cat {
-
-  implicit val catPrintable: Printable[Cat] = new Printable[Cat] {
-    override def stringify(cat: Cat): String = {
-      val name  = Printable.stringify(cat.name)
-      val age   = Printable.stringify(cat.age)
-      val color = Printable.stringify(cat.color)
-      s"$name is a $age year-old $color cat."
-    }
-  }
-}
-
-object Main extends App {
 
   val mizzi = Cat("Mizzi", 1, "black")
   val garfield = Cat("Garfield", 38, "ginger and black")
 
   {
-    println("---> Using the Printable companion object to stringify and pprint ...")
-
-    println(Printable.stringify("Cats are meeting here!"))
-    Printable.pprint("Cats are meeting here!")
-    Printable.pprint(2)
-    Printable.pprint(false)
-    Printable.pprint(new Date)
-
-    Printable.pprint(mizzi)
-    Printable.pprint(garfield)
-    Printable.pprint(Option(garfield))
-  }
-
-  {
     println("\n--> This looks a bit nicer if we import the methods of the companion object ...")
-
-    import Printable._
 
     println(stringify("Cats are meeting here!"))
     pprint("Cats are meeting here!")
@@ -121,8 +96,6 @@ object Main extends App {
   {
     println("\n--> now using extension methods (type enrichment) ...")
 
-    import Printable.syntax._
-
     println("Cats are meeting here!".stringify)
     "Cats are meeting here!".pprint
     2.pprint
@@ -135,8 +108,6 @@ object Main extends App {
 
   {
     println("\n--> stringifying/printing Option[A] ...")
-
-    import Printable.syntax._
 
     Option("Cats are meeting here!").pprint
     Option.empty[String].pprint
@@ -153,8 +124,6 @@ object Main extends App {
 
   {
     println("\n--> stringifying/printing List[A] ...")
-
-    import Printable.syntax._
 
     List("Cats", "are", "meeting", "here", "!").pprint
     List.empty[String].pprint
