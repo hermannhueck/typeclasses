@@ -7,7 +7,7 @@ import scala.language.implicitConversions
 // type class, a trait with at least one type parameter
 trait Printable[A] {
   def stringify(value: A): String
-  def pprint[B <: A](value: B): Unit = println(stringify(value))
+  def pprint(value: A): Unit = println(stringify(value))
 }
 
 // type class companion object
