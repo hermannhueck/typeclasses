@@ -1,4 +1,4 @@
-package typeclasses._01a_my_printable
+package typeclasses._01b_my_printable_implicitscope
 
 import java.util.Date
 
