@@ -25,7 +25,8 @@ object Main extends App {
 
   println("\n-- Ints in descending order:")
   implicit object intOrderingDesc extends Ordering[Int] {
-    override def compare(x: Int, y: Int): Int = if (y < x) -1 else if (y > x) 1 else 0
+    override def compare(x: Int, y: Int): Int =
+      if (y < x) -1 else if (y > x) 1 else 0 // descending order
   }
   println(ints.sorted)
 
