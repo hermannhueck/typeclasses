@@ -63,7 +63,7 @@ object Printable {
 
     implicit class PrintableOps[A](value: A) {
       def stringify(implicit p: Printable[A]): String = p.stringify(value)
-      def pprint(implicit p: Printable[A]): Unit = println(stringify)
+      def pprint(implicit p: Printable[A]): Unit = p.pprint(value)
     }
   }
 }

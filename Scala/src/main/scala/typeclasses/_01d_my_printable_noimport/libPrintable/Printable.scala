@@ -25,7 +25,7 @@ object Printable {
 
   implicit def optionPrintable[A: Printable]: Printable[Option[A]] =
     (optA: Option[A]) => optA
-      .map(Printable[A].stringify) // same as:
+      .map(Printable[A].stringify)
       .map(s => s"Option($s)")
       .getOrElse("None")
 
@@ -35,16 +35,19 @@ object Printable {
       .mkString("List(", ", ", ")")
 }
 
+// trait written to be extended by package object:
+// either library package object or user package object
+//
 trait PrintableUtils {
 
   // interface object methods
-  def stringify[A: Printable](value: A): String = Printable[A].stringify(value) // same as:
-  def pprint[A: Printable](value: A): Unit = println(stringify(value))
+  def stringify[A: Printable](value: A): String = Printable[A].stringify(value)
+  def pprint[A: Printable](value: A): Unit = Printable[A].pprint(value)
 
   // pimp = type enrichment = extension methods
   implicit class PrintableOps[A: Printable](value: A) {
     def stringify: String = Printable[A].stringify(value)
-    def pprint: Unit = println(stringify)
+    def pprint: Unit = Printable[A].pprint(value)
   }
 
   // implicit def toPrintableOps[A: Printable](value: A): PrintableOps[A] = new PrintableOps[A](value)
